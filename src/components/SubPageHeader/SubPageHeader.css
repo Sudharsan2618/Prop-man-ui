@@ -1,0 +1,64 @@
+/* SubPageHeader — Navy bar back navigation header */
+
+.sub-header {
+  flex-shrink: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--primary);
+  min-height: 56px;
+}
+
+.sub-header__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #FFFFFF;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.sub-header__back:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sub-header__back .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.sub-header__center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  justify-content: center;
+}
+
+.sub-header__icon {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.sub-header__title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.sub-header__right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}

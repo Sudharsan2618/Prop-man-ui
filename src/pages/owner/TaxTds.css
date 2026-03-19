@@ -1,0 +1,35 @@
+/* TaxTds — Gold accent */
+.tax { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.tax__fy-pill {
+  display: flex; align-items: center; gap: var(--space-1); padding: 6px 16px;
+  border-radius: var(--radius-full); font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  background: rgba(212,168,67,0.12); color: #D4A843; border: 1px solid rgba(212,168,67,0.3);
+  cursor: pointer;
+}
+
+.tax__hero {
+  border: 1px solid rgba(212,168,67,0.25); text-align: center;
+}
+.tax__hero-amount {
+  font-size: var(--fs-display); font-weight: var(--fw-bold); color: #D4A843;
+  margin: var(--space-1) 0 var(--space-2);
+}
+.tax__hero-details {
+  margin-top: var(--space-3); font-size: var(--fs-caption); color: var(--text-secondary); line-height: 1.7;
+}
+
+.tax__gold-btn {
+  background: linear-gradient(135deg, #D4A843, #B8902E) !important;
+}
+
+.tax__monthly-list, .tax__cert-list { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.tax__month-row { display: flex; justify-content: space-between; align-items: center; }
+
+.tax__cal-icon, .tax__cert-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md); flex-shrink: 0;
+  background: rgba(212,168,67,0.12); display: flex; align-items: center; justify-content: center;
+}
+
+.tax__advisory { border-left: 3px solid #3B82F6; }

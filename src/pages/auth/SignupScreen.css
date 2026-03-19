@@ -1,0 +1,38 @@
+/* SignupScreen — Light theme */
+.signup {
+  max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh;
+  position: relative; overflow: hidden; background: #FFFFFF;
+}
+.signup__bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(27, 42, 74, 0.03) 0%, transparent 60%);
+}
+.signup__content {
+  position: relative; z-index: 1; padding: var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-4);
+  min-height: 100vh; min-height: 100dvh;
+}
+.signup__back {
+  width: 40px; height: 40px; border-radius: 50%; background: rgba(27, 42, 74, 0.06);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); transition: background 0.2s;
+}
+.signup__back:hover { background: rgba(27, 42, 74, 0.1); }
+.signup__header { text-align: center; }
+.signup__icon {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto var(--space-3);
+  background: rgba(27, 42, 74, 0.06); border: 1px solid rgba(27, 42, 74, 0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.signup__title { font-size: var(--fs-h1); font-weight: var(--fw-bold); color: var(--text-primary); }
+.signup__subtitle { font-size: var(--fs-body); color: var(--text-secondary); margin-top: var(--space-1); }
+.signup__form { display: flex; flex-direction: column; gap: var(--space-3); }
+.signup__error { color: var(--status-danger); font-size: var(--fs-caption); text-align: center; }
+.signup__login-link {
+  text-align: center; font-size: var(--fs-caption); color: var(--text-tertiary);
+  padding-bottom: var(--space-4);
+}
+.signup__link {
+  background: none; border: none; color: var(--accent); font-weight: var(--fw-semibold);
+  cursor: pointer; font-size: inherit; text-decoration: underline; text-underline-offset: 2px;
+}

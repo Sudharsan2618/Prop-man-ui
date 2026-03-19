@@ -1,0 +1,15 @@
+/* SecondaryButton — additional styles */
+
+.btn-secondary__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.btn-secondary--auto {
+  width: auto;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,90 @@
+/* ServiceMarketplace */
+
+.svc-market {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.svc-market__location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.svc-market__location-text {
+  flex: 1;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.svc-market__change-btn {
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.svc-market__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.svc-market__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  text-align: center;
+  position: relative;
+}
+
+.svc-market__card--emergency {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.svc-market__emergency-badge {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  padding: 2px 6px;
+  font-size: 8px;
+  font-weight: var(--fw-bold);
+  color: #fff;
+  background: var(--status-danger);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.svc-market__card-icon {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.svc-market__card-icon--emergency {
+  color: var(--status-danger);
+}
+
+.svc-market__card-label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+.svc-market__card-price {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}

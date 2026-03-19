@@ -1,0 +1,21 @@
+/* MessagingInbox */
+.mi { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.mi__list { display: flex; flex-direction: column; gap: var(--space-2); }
+.mi__conv { padding: var(--space-3) var(--space-4); }
+.mi__conv-row { display: flex; align-items: center; gap: var(--space-3); }
+.mi__avatar-wrap { position: relative; flex-shrink: 0; }
+.mi__online-dot {
+  position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px;
+  border-radius: 50%; background: #16A34A; border: 2px solid var(--surface-dark);
+}
+.mi__time { font-size: 10px; color: var(--text-tertiary); white-space: nowrap; }
+.mi__preview {
+  font-size: var(--fs-caption); color: var(--text-secondary); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mi__unread-badge {
+  min-width: 20px; height: 20px; border-radius: 50%; background: var(--primary);
+  color: var(--bg-dark); font-size: 10px; font-weight: var(--fw-bold);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}

@@ -1,0 +1,132 @@
+/* Provider Dashboard — NRIHomeHub style */
+
+.pd-home { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* ── Welcome ── */
+.pdh__welcome-title {
+  font-size: var(--fs-h1); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.pdh__welcome-sub {
+  font-size: var(--fs-body); color: var(--text-secondary); margin-top: 2px;
+}
+.pdh__status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; margin-top: var(--space-2);
+  font-size: 12px; font-weight: var(--fw-bold);
+  color: var(--status-success); background: rgba(22,163,74,0.08);
+  border-radius: var(--radius-full);
+}
+.pdh__status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--status-success); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Payout Card ── */
+.pdh__payout-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+.pdh__payout-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-4);
+}
+.pdh__payout-heading {
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.pdh__payout-icon { font-size: 22px; color: var(--accent); }
+.pdh__payout-title {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.pdh__payout-label {
+  font-size: var(--fs-caption); color: var(--text-secondary); margin-bottom: 2px;
+}
+.pdh__payout-amount {
+  font-size: 28px; font-weight: var(--fw-bold); color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+.pdh__payout-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-4);
+}
+.pdh__payout-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 12px;
+  border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+  background: #FFFFFF; color: var(--text-primary);
+  font-size: var(--fs-body); font-weight: var(--fw-bold);
+  cursor: pointer; transition: background 0.2s;
+}
+.pdh__payout-btn:hover { box-shadow: var(--shadow-2); }
+
+/* ── Stats Grid ── */
+.pdh__stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+}
+.pdh__stat-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-1); padding: var(--space-4) var(--space-2) !important;
+  text-align: center;
+}
+.pdh__stat-icon { font-size: 28px; }
+.pdh__stat-value {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.pdh__stat-label {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+
+/* ── Job Lists ── */
+.pdh__job-list {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.pdh__job-card--active {
+  border-left: 3px solid var(--status-success) !important;
+}
+.pdh__job-row {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+}
+.pdh__job-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-lg);
+  background: var(--bg-dark); display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.pdh__job-icon--active {
+  background: var(--primary);
+}
+.pdh__job-info { flex: 1; }
+.pdh__job-type {
+  font-weight: var(--fw-semibold); color: var(--text-primary); margin-bottom: 2px;
+}
+.pdh__job-desc {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+.pdh__job-meta {
+  display: flex; align-items: center; gap: 4px;
+  font-size: var(--fs-caption); color: var(--text-tertiary); margin-top: 4px;
+}
+.pdh__active-count {
+  font-size: var(--fs-caption); color: var(--status-success);
+  font-weight: var(--fw-semibold);
+}
+.pdh__empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-2); padding: var(--space-6) 0; color: var(--text-secondary);
+}
+
+/* ── Quick Action Cards ── */
+.pdh__action-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+}
+.pdh__action-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-3); padding: var(--space-5) var(--space-3) !important;
+  text-align: center;
+}
+.pdh__action-icon { font-size: 36px; color: var(--primary); }
+.pdh__action-label {
+  font-size: var(--fs-body); font-weight: var(--fw-semibold); color: var(--text-primary);
+}

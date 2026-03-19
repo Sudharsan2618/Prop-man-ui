@@ -1,0 +1,24 @@
+/* PrimaryButton — additional component styles */
+
+.btn-primary__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.btn-primary__label {
+  flex: 1;
+}
+
+.btn-primary__amount {
+  font-weight: var(--fw-bold);
+  margin-left: auto;
+}
+
+/* When amount is present, left-align label */
+.btn-primary:has(.btn-primary__amount) {
+  justify-content: space-between;
+}
+
+.btn-primary--auto {
+  width: auto;
+}

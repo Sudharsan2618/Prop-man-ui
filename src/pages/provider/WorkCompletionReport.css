@@ -1,0 +1,182 @@
+/* WorkCompletionReport */
+
+.wcr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.wcr__job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wcr__job-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.wcr__overline {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+/* Photos */
+.wcr__photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.wcr__photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wcr__photo-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background: rgba(27, 42, 74, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wcr__photo-dashed {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  border: 2px dashed rgba(27, 42, 74, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.wcr__photo-dashed:hover {
+  border-color: var(--primary);
+}
+
+.wcr__photo-label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+}
+
+.wcr__photo-uploaded {
+  font-size: 11px;
+  color: var(--status-success);
+}
+
+/* Invoice */
+.wcr__invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.wcr__invoice-header .wcr__overline {
+  margin-bottom: 0;
+}
+
+.wcr__add-item {
+  font-size: var(--fs-caption);
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: var(--fw-semibold);
+}
+
+.wcr__invoice {
+  display: flex;
+  flex-direction: column;
+}
+
+.wcr__invoice-row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) 0;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.wcr__invoice-row--header {
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(27, 42, 74, 0.06);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.wcr__invoice-section-label {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: var(--space-2) 0 var(--space-1);
+}
+
+.wcr__invoice-subtotal {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  border-top: 1px dashed rgba(27, 42, 74, 0.06);
+}
+
+.wcr__invoice-grand {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-3) 0 0;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  border-top: 2px solid rgba(27, 42, 74, 0.06);
+  margin-top: var(--space-2);
+}
+
+/* Signature */
+.wcr__sign-canvas {
+  position: relative;
+  height: 100px;
+  border: 2px dashed rgba(27, 42, 74, 0.06);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wcr__sign-placeholder {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.wcr__sign-baseline {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  border-bottom: 2px dashed rgba(27, 42, 74, 0.04);
+}

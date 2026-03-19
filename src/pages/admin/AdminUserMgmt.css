@@ -1,0 +1,11 @@
+/* AdminUserMgmt */
+.aum { display: flex; flex-direction: column; gap: var(--space-4); }
+.aum__list { display: flex; flex-direction: column; gap: var(--space-3); }
+.aum__card { display: flex; flex-direction: column; gap: var(--space-3); }
+.aum__card-row { display: flex; gap: var(--space-3); }
+.aum__role-chip {
+  display: inline-block; padding: 1px 8px; border-radius: var(--radius-full);
+  font-size: 10px; font-weight: var(--fw-semibold); text-transform: capitalize;
+  background: rgba(27, 42, 74, 0.04); color: var(--text-tertiary);
+}
+.aum__card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }

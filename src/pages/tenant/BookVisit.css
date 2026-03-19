@@ -1,0 +1,164 @@
+/* BookVisit */
+
+.bvisit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bvisit__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-caption);
+  color: var(--status-danger);
+}
+
+.bvisit__success {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-caption);
+  color: #22C55E;
+}
+
+.bvisit__section-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.bvisit__booking-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.bvisit__booking-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bvisit__slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bvisit__date-header {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bvisit__time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.bvisit__time-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-3);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bvisit__time-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.bvisit__time-card--selected {
+  border-color: var(--primary);
+  background: rgba(19, 200, 236, 0.12);
+  box-shadow: 0 6px 18px rgba(19, 200, 236, 0.16);
+}
+
+.bvisit__book-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 10px 12px;
+}
+
+.bvisit__book-meta {
+  min-width: 0;
+}
+
+.bvisit__book-action {
+  justify-self: end;
+}
+
+.bvisit__selected-copy {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.bvisit__reschedule-copy {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--primary);
+}
+
+.bvisit__book-action button {
+  min-width: 156px;
+}
+
+.bvisit__tick-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: #22C55E;
+}
+
+.bvisit__tick-card .material-symbols-outlined {
+  font-size: 28px;
+}
+
+@media (max-width: 420px) {
+  .bvisit__book-cta {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .bvisit__book-action {
+    justify-self: stretch;
+  }
+
+  .bvisit__book-action button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.bvisit__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--text-secondary);
+}

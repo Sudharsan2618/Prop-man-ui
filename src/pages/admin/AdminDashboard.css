@@ -1,0 +1,103 @@
+/* Admin Dashboard — NRIHomeHub style */
+
+.adm { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* ── Welcome ── */
+.adm__welcome-title {
+  font-size: var(--fs-h1); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.adm__welcome-sub {
+  font-size: var(--fs-body); color: var(--text-secondary); margin-top: 2px;
+}
+.adm__role-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; margin-top: var(--space-2);
+  font-size: 12px; font-weight: var(--fw-bold);
+  color: var(--primary); background: rgba(27,42,74,0.08);
+  border-radius: var(--radius-full);
+}
+
+/* ── Stats Grid ── */
+.adm__stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+}
+.adm__stat-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-1); padding: var(--space-4) var(--space-2) !important;
+  text-align: center;
+}
+.adm__stat-icon { font-size: 28px; }
+.adm__stat-value {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.adm__stat-label { font-size: var(--fs-caption); color: var(--text-secondary); }
+
+/* ── Financial Summary Card ── */
+.adm__finance-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+.adm__finance-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-4);
+}
+.adm__finance-heading {
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.adm__finance-title {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold); color: var(--text-primary);
+}
+.adm__view-link {
+  font-size: var(--fs-caption); color: var(--accent); background: none;
+  border: none; cursor: pointer; font-weight: var(--fw-semibold);
+}
+.adm__finance-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+}
+.adm__finance-item {
+  padding: var(--space-3); background: var(--bg-dark);
+  border-radius: var(--radius-lg); text-align: center;
+}
+.adm__finance-label {
+  font-size: var(--fs-caption); color: var(--text-secondary); margin-bottom: 4px;
+}
+.adm__finance-value {
+  font-size: var(--fs-h3); font-weight: var(--fw-bold); color: var(--primary);
+}
+
+/* ── Activity Feed ── */
+.adm__activity-list {
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.adm__activity-row {
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.adm__activity-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.adm__activity-info { flex: 1; }
+.adm__activity-label {
+  font-weight: var(--fw-semibold); color: var(--text-primary);
+  font-size: var(--fs-body);
+}
+.adm__activity-detail {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+.adm__activity-time {
+  font-size: 11px; color: var(--text-tertiary); white-space: nowrap;
+}
+
+/* ── Quick Actions ── */
+.adm__action-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+}
+.adm__action-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-3); padding: var(--space-5) var(--space-3) !important;
+  text-align: center;
+}
+.adm__action-icon { font-size: 36px; color: var(--primary); }
+.adm__action-label {
+  font-size: var(--fs-body); font-weight: var(--fw-semibold); color: var(--text-primary);
+}

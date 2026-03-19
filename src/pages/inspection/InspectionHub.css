@@ -1,0 +1,27 @@
+/* InspectionHub — Gold accent */
+.ih { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.ih__filter-link {
+  background: none; border: none; cursor: pointer;
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold); color: #D4A843;
+}
+
+/* Stats 2×2 */
+.ih__stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.ih__stat-card {
+  text-align: center; border: 1px solid rgba(212,168,67,0.2);
+  padding: var(--space-3);
+}
+.ih__stat-value { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+.ih__stat-label { font-size: 11px; font-weight: var(--fw-semibold); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+/* List */
+.ih__list { display: flex; flex-direction: column; gap: var(--space-3); }
+.ih__card { display: flex; flex-direction: column; gap: var(--space-3); }
+.ih__card-body { display: flex; gap: var(--space-3); }
+.ih__card-thumb {
+  width: 72px; height: 72px; border-radius: var(--radius-lg); object-fit: cover; flex-shrink: 0;
+}
+
+/* Gold button override */
+.ih__gold-btn { background: linear-gradient(135deg, #D4A843, #B8902E) !important; }

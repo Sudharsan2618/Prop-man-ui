@@ -1,0 +1,71 @@
+/* FAB — Floating Action Button */
+
+.fab {
+  position: fixed;
+  bottom: 88px; /* above bottom nav */
+  right: calc(50% - 215px + 16px); /* align with app container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-3);
+  z-index: 40;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fab:hover {
+  transform: scale(1.05);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+.fab--primary {
+  background: var(--primary);
+  color: var(--bg-dark);
+  box-shadow: var(--shadow-glow), var(--shadow-3);
+}
+
+.fab--gold {
+  background: var(--gold-accent);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px rgba(212, 168, 67, 0.3), var(--shadow-3);
+}
+
+.fab__icon {
+  font-size: 24px;
+}
+
+/* Extended FAB */
+.fab--extended {
+  width: auto;
+  border-radius: var(--radius-xl);
+  padding: 0 var(--space-5);
+  height: 48px;
+}
+
+.fab__label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+/* Responsive: keep FAB inside container on wider screens */
+@media (min-width: 430px) {
+  .fab {
+    right: calc(50% - 215px + 16px);
+  }
+}
+
+@media (max-width: 430px) {
+  .fab {
+    right: var(--space-4);
+  }
+}

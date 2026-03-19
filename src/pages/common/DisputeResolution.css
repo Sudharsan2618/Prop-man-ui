@@ -1,0 +1,24 @@
+/* DisputeResolution */
+.dr { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.dr__alert-card { border: 1px solid rgba(245,158,11,0.3); }
+
+.dr__claim { position: relative; }
+.dr__claim--owner { border-left: 3px solid #EF4444; }
+.dr__claim--tenant { border-left: 3px solid var(--primary); }
+.dr__claim--mediator { border-left: 3px solid #D4A843; }
+
+.dr__mediator-overline {
+  font-size: 9px; font-weight: var(--fw-bold); color: #D4A843;
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-2);
+}
+
+.dr__claim-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+
+.dr__photos { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
+.dr__photo-thumb {
+  width: 64px; height: 64px; border-radius: var(--radius-md); background: rgba(27, 42, 74, 0.04);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.dr__actions { display: flex; flex-direction: column; gap: var(--space-3); }

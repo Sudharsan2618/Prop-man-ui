@@ -1,0 +1,40 @@
+/* QuickActionCard */
+
+.quick-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.quick-action-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.quick-action-card:hover .quick-action-card__icon-wrap {
+  transform: scale(1.1);
+}
+
+.quick-action-card__icon-wrap .material-symbols-outlined {
+  font-size: var(--icon-lg);
+  color: var(--primary);
+}
+
+.quick-action-card__label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+}

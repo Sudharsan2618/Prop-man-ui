@@ -1,0 +1,32 @@
+/* Component barrel exports */
+
+/* Phase 2 — Core Layout */
+export { default as GlassCard } from './GlassCard/GlassCard'
+export { default as StatusBadge } from './StatusBadge/StatusBadge'
+export { default as PrimaryButton } from './PrimaryButton/PrimaryButton'
+export { default as SecondaryButton } from './SecondaryButton/SecondaryButton'
+export { default as BottomNav } from './BottomNav/BottomNav'
+export { default as AppHeader } from './AppHeader/AppHeader'
+export { default as SubPageHeader } from './SubPageHeader/SubPageHeader'
+export { default as PageShell } from './PageShell/PageShell'
+
+/* Phase 3 — UI Component Library */
+export { default as InputField } from './InputField/InputField'
+export { default as FileUploadField } from './FileUploadField/FileUploadField'
+export { default as Dropdown } from './Dropdown/Dropdown'
+export { default as SearchBar } from './SearchBar/SearchBar'
+export { default as TabNav } from './TabNav/TabNav'
+export { default as FilterChips } from './FilterChips/FilterChips'
+export { default as Avatar } from './Avatar/Avatar'
+export { default as ProgressBar } from './ProgressBar/ProgressBar'
+export { default as ToggleSwitch } from './ToggleSwitch/ToggleSwitch'
+export { default as QuickActionCard } from './QuickActionCard/QuickActionCard'
+export { default as ActivityCard } from './ActivityCard/ActivityCard'
+export { default as PropertyCard } from './PropertyCard/PropertyCard'
+export { default as JobCard } from './JobCard/JobCard'
+export { default as NotificationCard } from './NotificationCard/NotificationCard'
+export { default as UserCard } from './UserCard/UserCard'
+export { default as CountdownTimer } from './CountdownTimer/CountdownTimer'
+export { default as FAB } from './FAB/FAB'
+export { default as ConfirmModal } from './ConfirmModal/ConfirmModal'
+export { default as Skeleton } from './Skeleton/Skeleton'

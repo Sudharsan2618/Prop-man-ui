@@ -1,0 +1,137 @@
+/* BookSlot */
+
+.book-slot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.book-slot__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.book-slot__summary-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--primary-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Calendar */
+.book-slot__cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.book-slot__cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.book-slot__cal-nav:hover {
+  background: rgba(27, 42, 74, 0.04);
+}
+
+.book-slot__cal-month {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+.book-slot__cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: var(--space-2);
+}
+
+.book-slot__cal-wd {
+  text-align: center;
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  padding: var(--space-1) 0;
+}
+
+.book-slot__cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.book-slot__cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.book-slot__cal-day:hover:not(:disabled) {
+  background: rgba(27, 42, 74, 0.04);
+}
+
+.book-slot__cal-day--selected {
+  background: var(--primary) !important;
+  color: var(--bg-dark);
+  font-weight: var(--fw-bold);
+}
+
+.book-slot__cal-day--empty {
+  pointer-events: none;
+}
+
+/* Time Slots */
+.book-slot__times {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.book-slot__time {
+  padding: var(--space-3);
+  text-align: center;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--text-tertiary);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.book-slot__time:hover {
+  background: rgba(27, 42, 74, 0.04);
+}
+
+.book-slot__time--selected {
+  background: var(--primary);
+  color: var(--bg-dark);
+  border-color: var(--primary);
+}

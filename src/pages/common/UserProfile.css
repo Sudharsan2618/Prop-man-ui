@@ -1,0 +1,100 @@
+/* UserProfile — NRIHomeHub style */
+
+.up { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* ── Header ── */
+.up__header {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--primary);
+}
+.up__header-title {
+  font-size: var(--fs-body); font-weight: var(--fw-semibold); color: #FFFFFF;
+}
+.up__gear-btn {
+  background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.7);
+}
+.up__gear-btn:hover { color: #FFFFFF; }
+
+/* ── Profile Info Card ── */
+.up__profile-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.up__card-heading {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold);
+  color: var(--text-primary); margin-bottom: var(--space-4);
+}
+
+.up__profile-row {
+  display: flex; align-items: center; gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.up__avatar-ring {
+  flex-shrink: 0;
+  padding: 3px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+.up__profile-info { flex: 1; }
+
+.up__name {
+  font-size: var(--fs-h3); font-weight: var(--fw-bold);
+  color: var(--text-primary); margin-bottom: 2px;
+}
+
+.up__email {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.up__role-badge {
+  display: inline-block; padding: 3px 12px; border-radius: var(--radius-full);
+  font-size: 11px; font-weight: var(--fw-bold); color: var(--primary);
+  background: var(--primary-subtle); letter-spacing: 0.03em;
+}
+
+.up__edit-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(212,168,67,0.1); border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); cursor: pointer; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.up__edit-btn:hover { background: rgba(212,168,67,0.2); }
+
+/* ── Contact Details ── */
+.up__contact-grid {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+}
+
+.up__contact-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.up__contact-label {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+.up__contact-value {
+  font-size: var(--fs-body); font-weight: var(--fw-semibold);
+  color: var(--primary);
+}
+
+/* ── Account Settings ── */
+.up__overline {
+  font-size: 10px; font-weight: var(--fw-bold); color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2);
+}
+
+.up__menu-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.up__menu-item { padding: var(--space-3) var(--space-4) !important; }
+.up__menu-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  background: var(--bg-dark);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}

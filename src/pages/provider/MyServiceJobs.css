@@ -1,0 +1,85 @@
+/* MyServiceJobs — NRIHomeHub style */
+
+.msj {
+  display: flex; flex-direction: column; gap: var(--space-4);
+}
+
+/* ── Job list ── */
+.msj__jobs {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+
+.msj__empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-2); padding: var(--space-8) 0;
+  color: var(--text-secondary);
+}
+
+/* ── Job card ── */
+.msj__job-card {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+
+.msj__job-card--active {
+  border-left: 3px solid var(--status-success) !important;
+}
+
+.msj__job-top {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+}
+
+.msj__job-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.msj__job-header-info { flex: 1; }
+
+.msj__job-type {
+  font-weight: var(--fw-semibold); color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.msj__job-desc {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+
+/* Details block */
+.msj__job-details {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); background: var(--bg-dark);
+  border-radius: var(--radius-lg);
+}
+
+.msj__job-detail-row {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+
+.msj__detail-icon {
+  font-size: 16px; color: var(--text-tertiary); flex-shrink: 0;
+}
+
+/* Action buttons */
+.msj__job-actions {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2);
+}
+
+.msj__action-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+  background: #FFFFFF; color: var(--primary);
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  cursor: pointer; transition: background 0.2s;
+}
+
+.msj__action-btn:hover { background: var(--bg-dark); }
+
+.msj__action-btn--primary {
+  background: var(--primary); color: #FFFFFF; border-color: var(--primary);
+}
+.msj__action-btn--primary:hover {
+  background: #152240;
+}

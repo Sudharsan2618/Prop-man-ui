@@ -1,0 +1,34 @@
+/* KycVerification */
+.kyc { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.kyc__overline {
+  font-size: 10px; font-weight: var(--fw-bold); color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2);
+}
+
+.kyc__doc-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.kyc__doc-card--highlight { border: 1px solid rgba(27, 42, 74, 0.15); }
+.kyc__doc-row { display: flex; align-items: center; gap: var(--space-3); }
+.kyc__doc-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-lg); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.kyc__doc-icon--verified { background: rgba(34,197,94,0.15); color: #16A34A; }
+.kyc__doc-icon--pending { background: rgba(245,158,11,0.15); color: #F59E0B; }
+.kyc__doc-icon--upload { background: var(--primary-subtle); color: var(--primary); }
+
+.kyc__selfie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+.kyc__selfie-card { display: flex; flex-direction: column; align-items: center; }
+.kyc__camera-preview {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 3px dashed rgba(19,200,236,0.4); display: flex; align-items: center; justify-content: center;
+  background: rgba(19,200,236,0.05);
+}
+
+.kyc__badges {
+  display: flex; justify-content: center; gap: var(--space-5);
+}
+.kyc__badge {
+  display: flex; align-items: center; gap: 6px; font-size: var(--fs-caption);
+  color: var(--text-secondary); font-weight: var(--fw-medium);
+}

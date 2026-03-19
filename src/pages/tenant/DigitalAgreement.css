@@ -1,0 +1,169 @@
+/* DigitalAgreement */
+
+.agreement {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.agreement__instructions {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.agreement__overline {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.agreement__parties {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.agreement__party-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.agreement__role-label {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: 2px 10px;
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  color: var(--primary);
+  background: var(--primary-subtle);
+  border-radius: var(--radius-full);
+}
+
+.agreement__doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.agreement__expand-link {
+  font-size: var(--fs-caption);
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: var(--fw-medium);
+}
+
+.agreement__document {
+  border-left: 3px solid var(--primary);
+}
+
+.agreement__doc-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  text-align: center;
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+.agreement__doc-text {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-2);
+}
+
+.agreement__highlight {
+  color: var(--primary);
+  font-weight: var(--fw-semibold);
+}
+
+/* Signature */
+.agreement__sign-area {
+  margin-top: var(--space-3);
+}
+
+.agreement__sign-canvas {
+  position: relative;
+  height: 120px;
+  border: 2px dashed rgba(27, 42, 74, 0.06);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agreement__sign-placeholder {
+  color: var(--text-tertiary);
+  font-size: var(--fs-body);
+  font-style: italic;
+}
+
+.agreement__sign-baseline {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  border-bottom: 2px dashed rgba(27, 42, 74, 0.06);
+}
+
+.agreement__sign-delete {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+
+.agreement__sign-input {
+  width: 100%;
+  padding: var(--space-4);
+  background: transparent;
+  border: 2px dashed rgba(27, 42, 74, 0.06);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  text-align: center;
+  outline: none;
+}
+
+.agreement__sign-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 2px dashed rgba(27, 42, 74, 0.06);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+
+.agreement__terms-note {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.agreement__error {
+  display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg); color: #EF4444; font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+}
+
+.agreement__full-text {
+  white-space: pre-wrap; word-wrap: break-word;
+  font-size: 11px; line-height: 1.6; color: var(--text-secondary);
+  margin-top: var(--space-2); max-height: 400px; overflow-y: auto;
+  font-family: inherit;
+}

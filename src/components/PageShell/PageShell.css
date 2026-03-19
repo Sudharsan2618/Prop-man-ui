@@ -1,0 +1,33 @@
+/* PageShell — Full-page layout container */
+
+.page-shell {
+  max-width: 430px;
+  margin: 0 auto;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-dark);
+  overflow: hidden; /* prevent the shell itself from scrolling */
+}
+
+.page-shell__content {
+  flex: 1;
+  padding: var(--space-4);
+  padding-bottom: var(--space-4);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0; /* critical: allows flex child to shrink below content size */
+}
+
+.page-shell__sticky-footer {
+  flex-shrink: 0;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: rgba(245, 247, 250, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(27, 42, 74, 0.04);
+  z-index: 40;
+}

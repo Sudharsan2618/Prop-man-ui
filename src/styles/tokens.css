@@ -1,0 +1,90 @@
+/* ============================================
+   LuxeLife — Design Tokens (Light Theme)
+   Source of truth: NRIHomeHub reference design
+   ============================================ */
+
+:root {
+  /* ── Color Palette ── */
+  --bg-dark: #F5F7FA;
+  --surface-dark: #FFFFFF;
+  --surface-darker: #EEF1F5;
+
+  --primary: #1B2A4A;
+  --primary-glow: rgba(27, 42, 74, 0.15);
+  --primary-muted: rgba(27, 42, 74, 0.12);
+  --primary-subtle: rgba(27, 42, 74, 0.06);
+
+  --accent: #D4A843;
+  --accent-glow: rgba(212, 168, 67, 0.2);
+  --accent-muted: rgba(212, 168, 67, 0.15);
+  --accent-subtle: rgba(212, 168, 67, 0.08);
+
+  --text-primary: #1B2A4A;
+  --text-secondary: #5A6B7F;
+  --text-tertiary: #9CA3AF;
+  --text-on-primary: #FFFFFF;
+
+  --status-success: #16A34A;
+  --status-warning: #D97706;
+  --status-danger: #DC2626;
+  --status-info: #2563EB;
+
+  --gold-accent: #D4A843;
+
+  /* Inspection module */
+  --inspect-bg: #FFFBF0;
+  --inspect-accent: #D4A843;
+  --inspect-border: rgba(212, 168, 67, 0.25);
+
+  /* ── Typography ── */
+  --font-family:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --fs-display: clamp(24px, 5vw, 32px);
+  --fs-h1: clamp(20px, 4vw, 24px);
+  --fs-h2: clamp(16px, 3.5vw, 18px);
+  --fs-h3: clamp(14px, 3vw, 16px);
+  --fs-body: 14px;
+  --fs-caption: 12px;
+  --fs-overline: 11px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ── Spacing Scale ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Elevation / Shadows ── */
+  --shadow-0: none;
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 4px 14px rgba(27, 42, 74, 0.15);
+
+  /* ── Glass Card (now white card) ── */
+  --glass-bg: #FFFFFF;
+  --glass-blur: 0px;
+  --glass-border: #E8EDF2;
+
+  /* ── Icon Sizes ── */
+  --icon-sm: 16px;
+  --icon-default: 20px;
+  --icon-md: 24px;
+  --icon-lg: 28px;
+  --icon-xl: 32px;
+}

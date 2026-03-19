@@ -1,0 +1,244 @@
+/* OwnerPortfolio — NRIHomeHub style */
+
+.op { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* ── Welcome ── */
+.op__welcome-title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+.op__welcome-sub {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.op__portfolio-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; margin-top: var(--space-2);
+  font-size: 12px; font-weight: var(--fw-bold);
+  color: var(--accent); background: rgba(212,168,67,0.1);
+  border-radius: var(--radius-full);
+}
+
+/* ── Earnings Overview Card ── */
+.op__earnings-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.op__earnings-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.op__earnings-heading {
+  display: flex; align-items: center; gap: var(--space-2);
+}
+
+.op__earnings-icon {
+  font-size: 22px; color: var(--accent);
+}
+
+.op__earnings-title {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.op__view-link {
+  font-size: var(--fs-caption); color: var(--accent);
+  background: none; border: none; cursor: pointer;
+  font-weight: var(--fw-semibold);
+}
+
+.op__earnings-grid {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+
+.op__earn-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+.op__earn-item:last-child { border-bottom: none; }
+
+.op__earn-item--highlight {
+  background: rgba(212,168,67,0.05);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-top: var(--space-1);
+  border-bottom: none;
+}
+
+.op__earn-label {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+
+.op__earn-value {
+  font-size: var(--fs-h3); font-weight: var(--fw-bold);
+}
+.op__earn-value--primary { color: var(--primary); }
+.op__earn-value--danger { color: var(--status-danger); }
+.op__earn-value--success { color: var(--status-success); }
+
+/* ── 6-Month Trend ── */
+.op__trend-card { }
+
+.op__trend-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.op__trend-title {
+  font-weight: var(--fw-semibold); color: var(--text-primary);
+}
+
+.op__chart {
+  display: flex; align-items: flex-end; gap: var(--space-2); height: 100px;
+}
+.op__chart-col {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 4px; height: 100%;
+}
+.op__chart-bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+.op__chart-bar {
+  width: 100%; border-radius: 4px 4px 0 0; min-height: 4px;
+  background: linear-gradient(180deg, var(--accent), rgba(212,168,67,0.2));
+  transition: height 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.op__chart-label {
+  font-size: 10px; color: var(--text-tertiary);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── Properties ── */
+.op__property-list {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+
+.op__prop-card { }
+
+.op__prop-row { display: flex; gap: var(--space-3); }
+
+.op__prop-thumb {
+  width: 80px; height: 80px; border-radius: var(--radius-lg);
+  object-fit: cover; flex-shrink: 0;
+}
+
+.op__prop-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+
+.op__prop-name-row {
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+}
+.op__prop-name { font-weight: var(--fw-semibold); color: var(--text-primary); }
+.op__prop-address { font-size: var(--fs-caption); color: var(--text-secondary); }
+.op__prop-tenant { font-size: var(--fs-caption); color: var(--text-tertiary); }
+.op__prop-rent {
+  font-size: var(--fs-body); font-weight: var(--fw-bold);
+  color: var(--accent); margin-top: 2px;
+}
+
+/* ── Onboarding Progress Card ── */
+.op__onb-card {
+  border: 1px solid var(--glass-border) !important;
+  border-left: 3px solid var(--primary) !important;
+}
+
+.op__onb-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.op__onb-title {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.op__onb-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.op__onb-progress {
+  margin-top: var(--space-3);
+  height: 10px;
+  background: #E9EEF5;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.op__onb-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #22C55E);
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.op__onb-meta {
+  margin-top: var(--space-2);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: var(--fw-medium);
+}
+
+/* ── Tax & TDS Card ── */
+.op__tax-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.op__tax-header {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.op__tax-icon-wrap {
+  width: 48px; height: 48px; border-radius: var(--radius-lg);
+  background: rgba(212,168,67,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.op__tax-title {
+  font-weight: var(--fw-semibold); color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.op__tax-sub {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+.op__tax-detail {
+  font-size: var(--fs-caption); color: var(--text-tertiary);
+}
+
+.op__tax-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 10px;
+  border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+  background: #FFFFFF; color: var(--primary);
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  cursor: pointer; transition: background 0.2s;
+}
+.op__tax-btn:hover { background: var(--bg-dark); }
+
+/* ── Quick Action Cards ── */
+.op__action-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+}
+
+.op__action-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-3); padding: var(--space-5) var(--space-3) !important;
+  text-align: center;
+}
+
+.op__action-icon {
+  font-size: 36px; color: var(--primary);
+}
+
+.op__action-label {
+  font-size: var(--fs-body); font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}

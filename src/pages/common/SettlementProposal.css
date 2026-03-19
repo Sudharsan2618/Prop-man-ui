@@ -1,0 +1,54 @@
+/* SettlementProposal */
+.sp { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.sp__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-4); background: var(--surface-dark);
+  border-bottom: 1px solid rgba(27, 42, 74, 0.04);
+}
+.sp__close-btn {
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(27, 42, 74, 0.04);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+}
+.sp__header-title { font-size: var(--fs-body); font-weight: var(--fw-semibold); }
+
+.sp__amount-card { text-align: center; }
+.sp__original-amount {
+  font-size: var(--fs-display); font-weight: var(--fw-bold); color: var(--text-primary);
+  margin: var(--space-1) 0 var(--space-4);
+}
+
+.sp__slider-section { text-align: left; padding: var(--space-3) 0; }
+.sp__slider {
+  width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+  background: rgba(27, 42, 74, 0.06); border-radius: var(--radius-full); outline: none;
+  margin: var(--space-2) 0;
+}
+.sp__slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--primary); cursor: pointer; border: 3px solid var(--bg-dark);
+  box-shadow: 0 0 8px rgba(19,200,236,0.4);
+}
+
+.sp__net-section {
+  padding-top: var(--space-3); border-top: 2px dashed rgba(27, 42, 74, 0.06);
+  margin-top: var(--space-2);
+}
+.sp__net-amount {
+  font-size: var(--fs-h1); font-weight: var(--fw-bold); color: var(--primary);
+  margin-top: var(--space-1);
+}
+
+.sp__textarea {
+  width: 100%; padding: var(--space-3); border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(27, 42, 74, 0.06);
+  color: var(--text-primary); font-size: var(--fs-body); outline: none;
+  resize: vertical; font-family: inherit; line-height: 1.5;
+}
+.sp__textarea::placeholder { color: var(--text-tertiary); }
+
+.sp__cancel {
+  background: none; border: none; color: var(--text-secondary); font-size: var(--fs-body);
+  font-weight: var(--fw-medium); cursor: pointer; text-align: center; padding: var(--space-2);
+}

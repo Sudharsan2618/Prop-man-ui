@@ -1,0 +1,67 @@
+/* JobCard */
+
+.job-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.job-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.job-card__type {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.job-card__icon {
+  font-size: var(--icon-md);
+  color: var(--primary);
+}
+
+.job-card__service {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.job-card__desc {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.job-card__details {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.job-card__detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.job-card__detail .material-symbols-outlined {
+  font-size: 16px;
+  color: var(--text-tertiary);
+}
+
+.job-card__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.job-card__actions > * {
+  flex: 1;
+}

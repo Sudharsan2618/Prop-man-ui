@@ -1,0 +1,68 @@
+/* WelcomeScreen — Light theme */
+.welcome {
+  max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column; position: relative; overflow: hidden;
+  background: #FFFFFF;
+}
+
+.welcome__bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(212, 168, 67, 0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(27, 42, 74, 0.04) 0%, transparent 50%);
+}
+.welcome__glow {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.08; z-index: 0;
+}
+.welcome__glow--1 {
+  width: 300px; height: 300px; top: -50px; right: -80px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  animation: pulse 6s ease-in-out infinite;
+}
+.welcome__glow--2 {
+  width: 200px; height: 200px; bottom: 100px; left: -60px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  animation: pulse 8s ease-in-out infinite 2s;
+}
+
+.welcome__content {
+  position: relative; z-index: 1; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--space-6); gap: var(--space-6);
+}
+
+/* Logo */
+.welcome__logo-section { text-align: center; }
+.welcome__logo-mark {
+  width: 72px; height: 72px; border-radius: 20px; margin: 0 auto var(--space-4);
+  background: rgba(27, 42, 74, 0.06); border: 1px solid rgba(27, 42, 74, 0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.welcome__brand {
+  font-size: 32px; font-weight: var(--fw-bold); letter-spacing: -0.02em;
+  color: var(--primary);
+}
+.welcome__brand span { color: var(--accent); }
+.welcome__tagline {
+  font-size: var(--fs-body); color: var(--text-secondary); margin-top: var(--space-1);
+}
+
+/* Features */
+.welcome__features { display: flex; flex-direction: column; gap: var(--space-3); }
+.welcome__feature-card { display: flex; align-items: center; gap: var(--space-3); }
+.welcome__feature-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-lg); flex-shrink: 0;
+  background: rgba(212, 168, 67, 0.1); display: flex; align-items: center; justify-content: center;
+}
+.welcome__feature-title { font-weight: var(--fw-semibold); font-size: var(--fs-body); margin-bottom: 2px; color: var(--text-primary); }
+.welcome__feature-desc { font-size: var(--fs-caption); color: var(--text-tertiary); line-height: 1.4; }
+
+/* CTA */
+.welcome__cta { display: flex; flex-direction: column; gap: var(--space-3); }
+.welcome__signin-link {
+  text-align: center; font-size: var(--fs-caption); color: var(--text-tertiary);
+}
+.welcome__link {
+  background: none; border: none; color: var(--accent); font-weight: var(--fw-semibold);
+  cursor: pointer; font-size: inherit; text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -1,0 +1,344 @@
+/* Tenant Dashboard — NRIHomeHub style */
+
+.tenant-dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ── Welcome Section ── */
+.td__welcome-title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+.td__welcome-sub {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ── Onboarding Card ── */
+.td__ob-card {
+  border-left: 3px solid var(--primary) !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.td__ob-card--rejected {
+  border-left-color: var(--status-danger) !important;
+}
+
+.td__ob-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.td__ob-header-icon {
+  font-size: 24px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.td__ob-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.td__ob-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.td__ob-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--glass-border);
+  overflow: hidden;
+}
+
+.td__ob-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--status-success);
+  transition: width 0.3s ease;
+}
+
+.td__ob-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.td__ob-step {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.td__ob-step--done {
+  color: var(--status-success);
+}
+
+.td__ob-step--rejected {
+  color: var(--status-danger);
+}
+
+.td__ob-action-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--glass-border);
+}
+
+.td__ob-next {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ── Rent Due Card ── */
+.td__rent-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.td__rent-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.td__rent-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.td__rent-icon {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.td__rent-title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.td__rent-label {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.td__rent-amount {
+  font-size: 28px;
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.td__rent-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.td__rent-date {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.td__pay-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.td__pay-btn:hover {
+  box-shadow: var(--shadow-2);
+}
+
+/* ── Service Marketplace Grid ── */
+.td__services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.td__service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  background: #FFFFFF;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.td__service-card:hover {
+  box-shadow: var(--shadow-2);
+  transform: translateY(-2px);
+}
+
+.td__service-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.td__service-label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ── My Agreement Card ── */
+.td__agreement-card {
+  border: 2px solid var(--accent) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.td__agreement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.td__agreement-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.td__agreement-title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.td__agreement-body {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.td__agreement-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.td__agreement-label {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.td__agreement-value {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.td__agreement-status {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--status-success);
+}
+
+.td__agreement-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.td__agreement-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  color: var(--primary);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.td__agreement-btn:hover {
+  background: var(--bg-dark);
+}
+
+.td__agreement-btn--danger {
+  color: var(--status-danger);
+}
+
+/* ── Quick Action Cards ── */
+.td__action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.td__action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-3) !important;
+  text-align: center;
+}
+
+.td__action-icon {
+  font-size: 36px;
+  color: var(--primary);
+}
+
+.td__action-label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}

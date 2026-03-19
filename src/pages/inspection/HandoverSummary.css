@@ -1,0 +1,49 @@
+/* HandoverSummary */
+.hs { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* Property Info */
+.hs__prop-row { display: flex; gap: var(--space-3); align-items: center; }
+.hs__prop-thumb {
+  width: 56px; height: 56px; border-radius: var(--radius-lg); background: rgba(27, 42, 74, 0.04);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* Scores */
+.hs__scores { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: var(--space-2); }
+.hs__score-card { text-align: center; padding: var(--space-3); }
+.hs__score-card--hero { border: 1px solid rgba(19,200,236,0.25); }
+.hs__score-value { font-size: var(--fs-h2); font-weight: var(--fw-bold); }
+.hs__score-label { font-size: 10px; font-weight: var(--fw-semibold); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+/* Rooms accordion */
+.hs__rooms { display: flex; flex-direction: column; gap: var(--space-2); }
+.hs__room-header { display: flex; align-items: center; gap: var(--space-3); }
+.hs__room-details { padding-top: var(--space-3); border-top: 1px solid rgba(27, 42, 74, 0.04); margin-top: var(--space-3); }
+.hs__detail-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.hs__detail-item {
+  font-size: var(--fs-caption); color: var(--text-secondary); padding-left: var(--space-4);
+  position: relative;
+}
+.hs__detail-item::before {
+  content: '•'; position: absolute; left: var(--space-2); color: var(--text-tertiary);
+}
+
+/* Signatures */
+.hs__sig-card { display: flex; flex-direction: column; }
+.hs__clear-link {
+  background: none; border: none; color: var(--primary); font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold); cursor: pointer;
+}
+.hs__sig-pad {
+  height: 80px; border: 2px dashed rgba(27, 42, 74, 0.06); border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color 0.2s; margin-bottom: var(--space-3);
+}
+.hs__sig-pad:hover { border-color: rgba(255,255,255,0.2); }
+.hs__sig-pad--signed { border-color: var(--primary); border-style: solid; background: rgba(19,200,236,0.04); }
+
+.hs__confirm-label {
+  display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-caption); color: var(--text-secondary);
+  cursor: pointer;
+}
+.hs__confirm-check { width: 18px; height: 18px; accent-color: var(--primary); flex-shrink: 0; }

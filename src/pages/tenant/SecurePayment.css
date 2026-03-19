@@ -1,0 +1,218 @@
+/* SecurePayment */
+
+.pay-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.pay-page__summary-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.pay-page__summary-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--primary-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pay-page__line-items {
+  border-top: 1px solid rgba(27, 42, 74, 0.04);
+  padding-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pay-page__line {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+}
+
+.pay-page__total-line {
+  border-top: 1px dashed rgba(27, 42, 74, 0.06);
+  padding-top: var(--space-2);
+  display: flex;
+  justify-content: space-between;
+  font-weight: var(--fw-bold);
+}
+
+.pay-page__total-amount {
+  color: var(--primary);
+  font-size: var(--fs-h2);
+}
+
+.pay-page__overline {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.pay-page__methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pay-page__radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pay-page__radio:last-child { border-bottom: none; }
+
+.pay-page__radio input[type="radio"] {
+  display: none;
+}
+
+.pay-page__radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.pay-page__radio input:checked ~ .pay-page__radio-circle {
+  border-color: var(--primary);
+}
+
+.pay-page__radio input:checked ~ .pay-page__radio-circle::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.pay-page__method-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pay-page__card-form {
+  padding: var(--space-3) 0 var(--space-3) 44px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pay-page__checkbox-label,
+.pay-page__terms {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pay-page__checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pay-page__terms-text {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pay-page__security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.pay-page__error {
+  display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg); color: #EF4444; font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+}
+
+.pay-page__success {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--space-8) var(--space-4); text-align: center;
+}
+
+.pay-page__note {
+  display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3);
+  background: rgba(19, 200, 236, 0.08); border: 1px solid rgba(19, 200, 236, 0.2);
+  border-radius: var(--radius-lg); color: var(--primary); font-size: var(--fs-caption);
+}
+
+.pay-page__razorpay-info {
+  border: 1px solid rgba(51, 149, 255, 0.12);
+  background: linear-gradient(135deg, rgba(51, 149, 255, 0.03) 0%, rgba(51, 149, 255, 0.01) 100%);
+}
+
+.pay-page__razorpay-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.pay-page__payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pay-page__method-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(51, 149, 255, 0.06);
+  border: 1px solid rgba(51, 149, 255, 0.12);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.pay-page__method-badge:hover {
+  background: rgba(51, 149, 255, 0.1);
+  border-color: rgba(51, 149, 255, 0.2);
+  color: var(--text-primary);
+}
