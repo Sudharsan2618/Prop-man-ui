@@ -130,6 +130,18 @@ export async function cancelVisit(id, { reason } = {}) {
 /** @deprecated — slot publishing is gone in v2.2 */
 export const fetchCalendarSlots = (params = {}) => fetchVisitRequests(params)
 
+/** @deprecated — calendar blocks were removed in v2.2; returns an empty list. */
+export const fetchCalendarBlocks = async (_params = {}) => []
+
+/** @deprecated — calendar blocks were removed in v2.2; no-op. */
+export const createCalendarBlock = async (_payload = {}) => ({})
+
+/** @deprecated — calendar blocks were removed in v2.2; no-op. */
+export const deleteCalendarBlock = async (_blockId) => ({})
+
+/** @deprecated — slot deletion is gone in v2.2; no-op. */
+export const deleteCalendarSlot = async (_slotId) => ({})
+
 /** @deprecated — use {@link createVisitRequest} */
 export const bookVisitSlot = (_slotId, propertyId) =>
   createVisitRequest({ property_id: propertyId })
