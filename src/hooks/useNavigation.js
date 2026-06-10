@@ -16,7 +16,7 @@ const TAB_ROUTES = {
     home: '/',
     properties: '/browse',
     services: '/services',
-    payments: '/pay',
+    payments: '/payments',
     profile: '/profile',
     alerts: '/notifications',
   },
@@ -37,13 +37,21 @@ const TAB_ROUTES = {
     profile: '/profile',
     alerts: '/notifications',
   },
-  admin: {
+  manager: {
     home: '/',
-    finance: '/admin-finance',
-    properties: '/admin-properties',
-    users: '/admin-users',
+    finance: '/manager-finance',
+    properties: '/manager-properties',
+    users: '/manager-users',
     profile: '/profile',
     settings: '/notification-settings',
+    alerts: '/notifications',
+  },
+  super_admin: {
+    home: '/sa',
+    users: '/sa/users',
+    properties: '/sa/properties',
+    permissions: '/sa/permissions',
+    profile: '/profile',
     alerts: '/notifications',
   },
 }
@@ -55,7 +63,8 @@ export const HOME_ROUTES = {
   tenant: '/',
   owner: '/owner-dashboard',
   provider: '/jobs',
-  admin: '/admin-finance',
+  manager: '/manager-finance',
+  super_admin: '/sa',
 }
 
 export function useNavigation() {
@@ -121,10 +130,19 @@ export function useNavigation() {
     dispute: (caseId) => navigate(`/dispute/${caseId || '84920'}`),
     settlementProposal: () => navigate('/settlement-proposal'),
 
-    // Admin
-    adminFinance: () => navigate('/admin-finance'),
-    adminUsers: () => navigate('/admin-users'),
+    // Manager (formerly 'admin')
+    managerFinance: () => navigate('/manager-finance'),
+    managerUsers: () => navigate('/manager-users'),
     kycReview: (userId) => navigate(`/kyc-review/${userId}`),
+    // Legacy aliases — keep for one release.
+    adminFinance: () => navigate('/manager-finance'),
+    adminUsers: () => navigate('/manager-users'),
+
+    // Super Admin
+    superAdminHome: () => navigate('/sa'),
+    superAdminUsers: () => navigate('/sa/users'),
+    superAdminProperties: () => navigate('/sa/properties'),
+    superAdminPermissions: () => navigate('/sa/permissions'),
 
     // Chat
     chat: (chatId) => navigate(`/chat/${chatId}`),

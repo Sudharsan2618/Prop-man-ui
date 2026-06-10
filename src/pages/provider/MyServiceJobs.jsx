@@ -42,7 +42,7 @@ export default function MyServiceJobs() {
       header={
         <AppHeader
           title="LuxeLife"
-          subtitle="My Service Jobs"
+          subtitle="Jobs"
           avatarText={user?.initials || ''}
           hasNotification={true}
           onNotificationClick={() => navigate('/notifications')}

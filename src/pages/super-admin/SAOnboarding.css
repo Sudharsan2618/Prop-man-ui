@@ -1,0 +1,258 @@
+/* SAOnboarding — workflow list */
+
+.saonb {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+.saonb__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.saonb__toolbar-search { flex: 1; min-width: 0; }
+
+/* Filter dropdown */
+.saonb__filter-wrap { position: relative; }
+
+.saonb__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-dark);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.saonb__filter-btn:hover { background: var(--surface-darker); }
+
+.saonb__filter-btn--open {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-color: var(--primary);
+}
+
+.saonb__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: var(--text-on-primary);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+}
+
+.saonb__filter-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-3);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: saonb-panel-in 0.14s ease-out;
+}
+
+@keyframes saonb-panel-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.saonb__filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.saonb__filter-label {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+}
+
+.saonb__filter-row select {
+  padding: 8px 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  font-family: inherit;
+}
+
+.saonb__filter-row select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.saonb__filter-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--glass-border);
+}
+
+.saonb__filter-reset {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.saonb__filter-reset:hover { color: var(--status-danger); }
+
+.saonb__filter-done {
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--text-on-primary);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.saonb__filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.saonb__chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: var(--surface-dark);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.saonb__chip--active {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-color: var(--primary);
+}
+
+.saonb__list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.saonb__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.saonb__row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3) var(--space-4);
+  padding-bottom: calc(var(--space-3) + 4px);
+  overflow: hidden;
+}
+
+.saonb__row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.saonb__row-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.saonb__row-pct {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* Thin progress strip flush with the bottom edge of the card. */
+.saonb__bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: var(--saonb-progress, 0%);
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  transition: width 0.25s ease;
+}
+
+.saonb__row-text { min-width: 0; flex: 1; }
+
+.saonb__row-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.saonb__row-title em { color: var(--text-tertiary); font-style: italic; }
+
+.saonb__row-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.saonb__row-sub strong { color: var(--text-primary); font-weight: var(--fw-semibold); }
+
+.saonb__sep { color: var(--text-tertiary); }
+
+.saonb__row-note {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Legacy progress styles removed; see .saonb__bar + .saonb__row-pct above. */

@@ -18,7 +18,7 @@ const CONVERSATIONS = [
 const FILTERS = ['All', 'Tenants', 'Owners', 'Maintenance']
 
 export default function MessagingInbox() {
-  const { role } = useRole()
+  const { role, user } = useRole()
   const navigate = useNavigate()
   const { handleTabChange: _navTabChange } = useNavigation()
   const [activeTab, setActiveTab] = useState('messages')
@@ -36,7 +36,16 @@ export default function MessagingInbox() {
 
   return (
     <PageShell
-      header={<AppHeader title="Messages" />}
+      header={
+        <AppHeader
+          title="LuxeLife"
+          subtitle="Messages"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
+          onNotificationClick={() => navigate('/notifications')}
+          onAvatarClick={() => navigate('/profile')}
+        />
+      }
       bottomNav={<BottomNav role={role} activeTab={activeTab} onTabChange={handleTabChange} />}
     >
       <div className="mi stagger-children">

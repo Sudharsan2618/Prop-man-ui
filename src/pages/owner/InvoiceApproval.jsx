@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   PageShell, SubPageHeader, GlassCard, PrimaryButton, SecondaryButton,
-  StatusBadge, Avatar,
+  StatusBadge, Avatar, PermissionGate,
 } from '../../components'
 import { fetchJobById } from '../../services/api'
+import { reportError } from '../../utils/errors'
 import './InvoiceApproval.css'
 
 export default function InvoiceApproval() {
@@ -13,7 +14,9 @@ export default function InvoiceApproval() {
   const [job, setJob] = useState({ id: jobId, serviceType: 'Service', description: '', providerName: 'Provider' })
 
   useEffect(() => {
-    fetchJobById(jobId).then(j => { if (j) setJob(j) }).catch(() => {})
+    fetchJobById(jobId)
+      .then(j => { if (j) setJob(j) })
+      .catch((err) => reportError(err, { context: 'InvoiceApproval.fetchJobById' }))
   }, [jobId])
 
   const materials = 570
@@ -91,10 +94,14 @@ export default function InvoiceApproval() {
           </div>
         </GlassCard>
 
-        {/* Actions */}
+        {/* Actions — gated on payment.update (manager/owner with payment.update perm). */}
         <div className="inv-app__actions">
-          <PrimaryButton icon="check" onClick={() => navigate(-1)}>✓ Approve & Release Payment</PrimaryButton>
-          <SecondaryButton variant="danger" icon="warning" onClick={() => navigate(-1)}>⚠ Dispute Invoice</SecondaryButton>
+          <PermissionGate code="payment.update">
+            <PrimaryButton icon="check" onClick={() => navigate(-1)}>✓ Approve & Release Payment</PrimaryButton>
+          </PermissionGate>
+          <PermissionGate code="payment.update">
+            <SecondaryButton variant="danger" icon="warning" onClick={() => navigate(-1)}>⚠ Dispute Invoice</SecondaryButton>
+          </PermissionGate>
         </div>
       </div>
     </PageShell>

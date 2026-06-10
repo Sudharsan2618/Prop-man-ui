@@ -16,12 +16,12 @@ export default function PortfolioHub() {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
 
-  if (!user) return null
-
   useEffect(() => {
     if (!user?.id) return
     fetchPropertiesByOwner(user.id).then((data) => { setProperties(data); setLoading(false) }).catch(() => setLoading(false))
-  }, [user.id])
+  }, [user?.id])
+
+  if (!user) return null
 
   const occupied = properties.filter((p) => p.occupancy === 'occupied').length
   const occupancyPct = properties.length ? Math.round((occupied / properties.length) * 100) : 0
@@ -34,7 +34,14 @@ export default function PortfolioHub() {
   return (
     <PageShell
       header={
-        <AppHeader title="Portfolio Hub" subtitle={`${properties.length} Premium Properties`} hasNotification onNotificationClick={() => navigate('/notifications')} />
+        <AppHeader
+          title="LuxeLife"
+          subtitle="Properties"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
+          onNotificationClick={() => navigate('/notifications')}
+          onAvatarClick={() => navigate('/profile')}
+        />
       }
       bottomNav={<BottomNav role="owner" activeTab={activeTab} onTabChange={handleTabChange} />}
     >

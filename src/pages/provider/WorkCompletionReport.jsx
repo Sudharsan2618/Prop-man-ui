@@ -4,6 +4,7 @@ import {
   PageShell, SubPageHeader, GlassCard, PrimaryButton, StatusBadge,
 } from '../../components'
 import { fetchJobById } from '../../services/api'
+import { reportError } from '../../utils/errors'
 import './WorkCompletionReport.css'
 
 export default function WorkCompletionReport() {
@@ -12,7 +13,9 @@ export default function WorkCompletionReport() {
   const [job, setJob] = useState({ id: jobId, serviceType: 'Service', description: '', address: '' })
 
   useEffect(() => {
-    fetchJobById(jobId).then(j => { if (j) setJob(j) }).catch(() => {})
+    fetchJobById(jobId)
+      .then(j => { if (j) setJob(j) })
+      .catch((err) => reportError(err, { context: 'WorkCompletionReport.fetchJobById' }))
   }, [jobId])
 
   const [invoiceItems, setInvoiceItems] = useState([

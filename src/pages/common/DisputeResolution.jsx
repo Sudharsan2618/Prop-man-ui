@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   PageShell, SubPageHeader, GlassCard, PrimaryButton, SecondaryButton,
-  StatusBadge, Avatar, BottomNav,
+  StatusBadge, Avatar, BottomNav, PermissionGate,
 } from '../../components'
 import { useRole } from '../../context/RoleContext'
 import { useNavigation } from '../../hooks/useNavigation'
@@ -91,10 +91,14 @@ export default function DisputeResolution() {
           </p>
         </GlassCard>
 
-        {/* Action Buttons */}
+        {/* Action Buttons — gated on dispute participation (anyOf payment.update + job.update) */}
         <div className="dr__actions">
-          <PrimaryButton icon="handshake" onClick={() => navigate('/settlement-proposal')}>Propose Settlement</PrimaryButton>
-          <SecondaryButton variant="danger" icon="gavel">Escalate to Admin</SecondaryButton>
+          <PermissionGate anyOf={['payment.update', 'job.update']}>
+            <PrimaryButton icon="handshake" onClick={() => navigate('/settlement-proposal')}>Propose Settlement</PrimaryButton>
+          </PermissionGate>
+          <PermissionGate code="audit_log.read">
+            <SecondaryButton variant="danger" icon="gavel">Escalate to Admin</SecondaryButton>
+          </PermissionGate>
         </div>
       </div>
     </PageShell>

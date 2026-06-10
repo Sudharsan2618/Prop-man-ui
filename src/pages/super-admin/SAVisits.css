@@ -1,0 +1,284 @@
+/* SAVisits — desktop layout for the super-admin visit-request fallback queue */
+
+.savisits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+.savisits__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-caption);
+  color: var(--status-danger);
+}
+
+.savisits__filter {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.savisits__chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: var(--surface-dark);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.savisits__chip--active {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-color: var(--primary);
+}
+
+.savisits__list { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.savisits__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.savisits__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.savisits__row-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.savisits__row-text { min-width: 0; flex: 1; }
+
+.savisits__row-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.savisits__row-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.savisits__row-tenant {
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+}
+
+/* Inline compact action buttons on the row header (Reschedule / Cancel for CONFIRMED visits). */
+.savisits__inline-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.savisits__btn-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--surface-darker);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.savisits__btn-inline .material-symbols-outlined { font-size: 14px; }
+
+.savisits__btn-inline:hover:not(:disabled) {
+  background: var(--primary-subtle);
+  border-color: var(--primary-muted);
+}
+
+.savisits__btn-inline--danger { color: var(--status-danger); }
+
+.savisits__btn-inline--danger:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: var(--status-danger);
+}
+
+.savisits__btn-inline:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.savisits__expand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+}
+
+.savisits__proposal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3);
+  background: var(--surface-darker);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-md);
+}
+
+.savisits__proposal-when {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.savisits__proposal-by {
+  font-size: var(--fs-overline);
+  color: var(--text-tertiary);
+  text-transform: capitalize;
+}
+
+.savisits__proposal-msg {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.savisits__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.savisits__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-darker);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.savisits__form-row {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.savisits__form-row .savisits__form-field { flex: 1; min-width: 160px; }
+
+.savisits__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.savisits__form-field > span {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+}
+
+.savisits__form-field input,
+.savisits__form-field textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  font-family: inherit;
+}
+
+.savisits__form-field input:focus,
+.savisits__form-field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.savisits__form-actions {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}
+
+.savisits__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.savisits__timeline-title {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-bold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.savisits__t-item {
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-darker);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-caption);
+}
+
+.savisits__t-item--superseded { opacity: 0.55; }
+.savisits__t-item--rejected   { border-left: 3px solid var(--status-danger); }
+.savisits__t-item--accepted   { border-left: 3px solid var(--status-success); }
+
+.savisits__t-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.savisits__t-by {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.savisits__t-status {
+  font-size: var(--fs-overline);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+}
+
+.savisits__t-when {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.savisits__t-msg {
+  font-size: var(--fs-overline);
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-top: 2px;
+}

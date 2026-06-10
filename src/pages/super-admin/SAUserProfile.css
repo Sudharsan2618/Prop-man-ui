@@ -1,0 +1,300 @@
+/* ============================================
+   SAUserProfile — Full-page user profile
+   ============================================ */
+
+.saup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Profile Header ── */
+.saup__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background: var(--surface-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.saup__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--text-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+}
+
+.saup__header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.saup__header-name {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.saup__header-role {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.saup__header-status {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+}
+
+.saup__header-status--active {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--status-success);
+}
+
+.saup__header-status--pending {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--status-warning);
+}
+
+/* ── Contact Grid ── */
+.saup__contact {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.saup__contact-item {
+  background: var(--surface-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.saup__contact-item .material-symbols-outlined {
+  font-size: 20px;
+  color: var(--text-tertiary);
+}
+
+.saup__contact-label {
+  font-size: var(--fs-overline);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.saup__contact-value {
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+/* ── Stats Row ── */
+.saup__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.saup__stat {
+  background: var(--surface-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.saup__stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.saup__stat-icon .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.saup__stat-val {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.saup__stat-lbl {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+/* ── Section ── */
+.saup__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.saup__section-title {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.saup__section-title .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* ── Property Cards ── */
+.saup__prop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.saup__prop-card {
+  background: var(--surface-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.saup__prop-card:hover {
+  border-color: var(--primary-muted);
+  box-shadow: var(--shadow-1);
+}
+
+.saup__prop-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(27, 42, 74, 0.06);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.saup__prop-icon .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.saup__prop-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.saup__prop-name {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+}
+
+.saup__prop-city {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.saup__prop-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.saup__prop-rent {
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  font-size: var(--fs-body);
+}
+
+.saup__prop-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+}
+
+.saup__prop-status--occupied {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--status-success);
+}
+
+.saup__prop-status--vacant {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--status-warning);
+}
+
+/* ── Empty ── */
+.saup__empty {
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--text-tertiary);
+}
+
+.saup__empty .material-symbols-outlined {
+  font-size: 36px;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+/* ── Loading ── */
+.saup__loading {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-tertiary);
+}
+
+/* ── Responsive ── */
+@media (min-width: 640px) {
+  .saup__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .saup__contact {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .saup__prop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .saup__prop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

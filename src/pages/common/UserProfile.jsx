@@ -22,7 +22,13 @@ export default function UserProfile() {
   const { handleTabChange: _navTabChange } = useNavigation()
   const [activeTab, setActiveTab] = useState('profile')
 
-  const roleLabels = { tenant: 'Tenant', owner: 'NRI Owner', provider: 'Service Provider', admin: 'Admin' }
+  const roleLabels = {
+    tenant: 'Tenant',
+    owner: 'NRI Owner',
+    provider: 'Service Provider',
+    manager: 'Manager',
+    super_admin: 'Super Admin',
+  }
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)

@@ -162,3 +162,190 @@
   text-align: center;
   color: var(--text-secondary);
 }
+
+/* ── Negotiation surface ───────────────────────────────────────────── */
+
+.bvisit__active {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.bvisit__active-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.bvisit__active-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.bvisit__active-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.bvisit__proposal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-3);
+  background: var(--surface-darker);
+  border: 1px solid var(--glass-border);
+  border-left: 3px solid var(--text-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.bvisit__proposal--me {
+  border-left-color: var(--primary);
+}
+
+.bvisit__proposal-when {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.bvisit__proposal-by {
+  font-size: var(--fs-overline);
+  color: var(--text-tertiary);
+  text-transform: capitalize;
+}
+
+.bvisit__proposal-msg {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.bvisit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.bvisit__actions button {
+  flex: 1 1 auto;
+  min-width: 120px;
+}
+
+.bvisit__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+}
+
+.bvisit__timeline-title {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-bold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bvisit__t-item {
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-darker);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-caption);
+}
+
+.bvisit__t-item--superseded { opacity: 0.55; }
+.bvisit__t-item--rejected   { border-left: 3px solid var(--status-danger); }
+.bvisit__t-item--accepted   { border-left: 3px solid var(--status-success); }
+
+.bvisit__t-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.bvisit__t-by {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.bvisit__t-status {
+  font-size: var(--fs-overline);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+}
+
+.bvisit__t-when {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.bvisit__t-msg {
+  font-size: var(--fs-overline);
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Form */
+.bvisit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.bvisit__form-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.bvisit__form-row { display: flex; flex-direction: column; gap: var(--space-3); }
+.bvisit__form-row--two { flex-direction: row; }
+.bvisit__form-row--two .bvisit__form-field { flex: 1; }
+
+.bvisit__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bvisit__form-field > span {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+}
+
+.bvisit__form-field input,
+.bvisit__form-field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  font-family: inherit;
+}
+
+.bvisit__form-field input:focus,
+.bvisit__form-field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.bvisit__form-actions {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}

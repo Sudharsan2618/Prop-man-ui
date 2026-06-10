@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageShell, SubPageHeader, GlassCard, PrimaryButton } from '../../components'
 import { fetchServiceCategories } from '../../services/api'
+import { reportError } from '../../utils/errors'
 import './BookSlot.css'
 
 const TIME_SLOTS = [
@@ -22,22 +23,27 @@ function generateCalendar(year, month) {
 export default function BookSlot() {
   const { serviceKey } = useParams()
   const navigate = useNavigate()
-  const [selectedDate, setSelectedDate] = useState(10) // day of month
+  const today = new Date()
+  const [selectedDate, setSelectedDate] = useState(today.getDate())
   const [selectedTime, setSelectedTime] = useState(null)
-  const [calMonth, setCalMonth] = useState(2) // March (0-indexed)
-  const [calYear, setCalYear] = useState(2026)
+  const [calMonth, setCalMonth] = useState(today.getMonth())
+  const [calYear, setCalYear] = useState(today.getFullYear())
   const [service, setService] = useState({ key: serviceKey, label: 'Service', icon: 'build', startPrice: 500 })
 
   useEffect(() => {
-    fetchServiceCategories().then(cats => {
-      const found = cats.find((s) => s.key === serviceKey) || cats[0]
-      if (found) setService(found)
-    }).catch(() => {})
+    fetchServiceCategories()
+      .then(cats => {
+        const found = cats.find((s) => s.key === serviceKey) || cats[0]
+        if (found) setService(found)
+      })
+      .catch((err) => reportError(err, { context: 'BookSlot.fetchServiceCategories', silent: true }))
   }, [serviceKey])
   const days = generateCalendar(calYear, calMonth)
   const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
   const prevMonth = () => {
+    // Prevent navigating before current month
+    if (calYear === today.getFullYear() && calMonth === today.getMonth()) return
     if (calMonth === 0) { setCalMonth(11); setCalYear(calYear - 1) }
     else setCalMonth(calMonth - 1)
   }
@@ -93,16 +99,19 @@ export default function BookSlot() {
               ))}
             </div>
             <div className="book-slot__cal-grid">
-              {days.map((day, i) => (
+              {days.map((day, i) => {
+                const isPast = day && calYear === today.getFullYear() && calMonth === today.getMonth() && day < today.getDate()
+                return (
                 <button
                   key={i}
-                  className={`book-slot__cal-day ${day === selectedDate ? 'book-slot__cal-day--selected' : ''} ${!day ? 'book-slot__cal-day--empty' : ''}`}
-                  disabled={!day}
-                  onClick={() => day && setSelectedDate(day)}
+                  className={`book-slot__cal-day ${day === selectedDate ? 'book-slot__cal-day--selected' : ''} ${!day ? 'book-slot__cal-day--empty' : ''} ${isPast ? 'book-slot__cal-day--past' : ''}`}
+                  disabled={!day || isPast}
+                  onClick={() => day && !isPast && setSelectedDate(day)}
                 >
                   {day}
                 </button>
-              ))}
+                )
+              })}
             </div>
           </GlassCard>
         </div>

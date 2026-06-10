@@ -4,7 +4,7 @@ import './WelcomeScreen.css'
 
 const FEATURES = [
   { icon: 'real_estate_agent', title: 'Property Management', desc: 'Manage premium properties across India with real-time insights' },
-  { icon: 'payments', title: 'Smart Payments', desc: 'Secure escrow-based rent collection with auto-splitting' },
+  { icon: 'payments', title: 'Hassle-Free Payments', desc: 'Simple offline rent collection with admin-verified receipts' },
   { icon: 'support_agent', title: '24/7 Support', desc: 'Dedicated concierge for maintenance, disputes & inspections' },
 ]
 

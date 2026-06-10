@@ -26,14 +26,20 @@ export default function ActivityCard({
   className = '',
   ...rest
 }) {
+  // A clickable activity card is a button, not a div. Non-clickable renders a li-like region.
+  const Element = onClick ? 'button' : 'div'
+  const interactiveProps = onClick
+    ? { type: 'button', onClick, 'aria-label': `${title}${subtitle ? ` — ${subtitle}` : ''}` }
+    : { role: 'group' }
+
   return (
-    <div
-      className={`activity-card glass-card glass-card--interactive ${className}`}
-      onClick={onClick}
+    <Element
+      className={`activity-card glass-card ${onClick ? 'glass-card--interactive' : ''} ${className}`}
+      {...interactiveProps}
       {...rest}
     >
       <div className="activity-card__left">
-        <div className="activity-card__icon" style={{ background: iconBg }}>
+        <div className="activity-card__icon" style={{ background: iconBg }} aria-hidden="true">
           <span className="material-symbols-outlined" style={{ color: iconColor, fontSize: '20px' }}>
             {icon}
           </span>
@@ -51,6 +57,6 @@ export default function ActivityCard({
         )}
         {badge}
       </div>
-    </div>
+    </Element>
   )
 }

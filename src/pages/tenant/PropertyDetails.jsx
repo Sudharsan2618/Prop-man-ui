@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   PageShell, GlassCard, PrimaryButton, SecondaryButton, StatusBadge, Avatar, Skeleton,
 } from '../../components'
+import { useGoBack } from '../../hooks/useGoBack'
 import { fetchMyVisits, fetchOnboardingWorkflows, fetchPropertyById, formatRent } from '../../services/api'
 import './PropertyDetails.css'
 
@@ -16,8 +17,10 @@ const AMENITY_MAP = {
   garden: { icon: 'yard', label: 'Landscaped Garden' },
 }
 
+// V2 onboarding states (08_database_schema.md §4 — onboarding_workflow_state_enum).
 const ONBOARDING_STEPS = [
-  { key: 'visit_booked', label: 'Visit Booked', icon: 'event', ts: 'visit_booked_at' },
+  { key: 'visit_requested', label: 'Visit Requested', icon: 'mail', ts: 'visit_requested_at' },
+  { key: 'visit_scheduled', label: 'Visit Scheduled', icon: 'event', ts: 'visit_scheduled_at' },
   { key: 'visit_approved', label: 'Visit Approved', icon: 'thumb_up', ts: 'visit_approved_at', rejKey: 'visit_rejected', rejTs: 'visit_rejected_at' },
   { key: 'agreement_generated', label: 'Agreement Ready', icon: 'description', ts: 'agreement_generated_at' },
   { key: 'tenant_signed', label: 'Agreement Signed', icon: 'draw', ts: 'tenant_signed_at' },
@@ -67,6 +70,7 @@ function OnboardingProgress({ workflow, navigate }) {
 export default function PropertyDetails() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const goBack = useGoBack('/browse')
   const [property, setProperty] = useState(null)
   const [loading, setLoading] = useState(true)
   const [imgIdx, setImgIdx] = useState(0)
@@ -102,13 +106,20 @@ export default function PropertyDetails() {
     <PageShell>
       <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
         <p style={{ color: 'var(--text-secondary)' }}>Property not found</p>
-        <PrimaryButton onClick={() => navigate(-1)} style={{ marginTop: 'var(--space-4)' }}>Go Back</PrimaryButton>
+        <PrimaryButton onClick={goBack} style={{ marginTop: 'var(--space-4)' }}>Go Back</PrimaryButton>
       </div>
     </PageShell>
   )
 
   const images = property.images || [property.image]
-  const bookedVisit = myVisits.find((visit) => visit.status === 'booked' && visit.property_id === id)
+  // A visit is "active" if it's anywhere in the request/negotiation/confirmed
+  // lifecycle for this property. Old enum value 'booked' kept for backward-compat.
+  const ACTIVE_VISIT_STATUSES = new Set([
+    'pending', 'negotiating', 'confirmed', 'appointment_scheduled', 'booked',
+  ])
+  const activeVisit = myVisits.find((visit) =>
+    visit.property_id === id && ACTIVE_VISIT_STATUSES.has(visit.status)
+  )
 
   const formatDate = (d) => {
     return new Date(`${d}T00:00:00`).toLocaleDateString('en-IN', {
@@ -134,7 +145,7 @@ export default function PropertyDetails() {
           <PrimaryButton fullWidth={false} onClick={() => {
             navigate(`/book-visit/${property.id}`)
           }}>
-            {bookedVisit ? 'Reschedule Visit' : 'Schedule Visit'}
+            {activeVisit ? 'Review Schedule' : 'Schedule Visit'}
           </PrimaryButton>
         </div>
       }
@@ -144,7 +155,7 @@ export default function PropertyDetails() {
         <div className="pd__gallery">
           <img src={images[imgIdx]} alt={property.name} className="pd__hero-img" />
           <div className="pd__gallery-overlay">
-            <button className="pd__gallery-btn" onClick={() => navigate(-1)}>
+            <button className="pd__gallery-btn" onClick={goBack}>
               <span className="material-symbols-outlined">arrow_back</span>
             </button>
             <div className="pd__gallery-actions">
@@ -205,20 +216,45 @@ export default function PropertyDetails() {
           )}
         </div>
 
-        {bookedVisit && (
-          <div className="pd__section">
-            <h2 className="section-heading">Meeting Booked</h2>
-            <GlassCard className="pd__visit-card">
-              <div className="pd__visit-header">
-                <StatusBadge status="pending">Booked</StatusBadge>
-                <span className="pd__visit-time">
-                  {formatDate(bookedVisit.slot_date)} · {formatTime(bookedVisit.start_time)} — {formatTime(bookedVisit.end_time)}
-                </span>
-              </div>
-              <p className="pd__visit-note">Need a different time? Tap <strong>Reschedule Visit</strong> below.</p>
-            </GlassCard>
-          </div>
-        )}
+        {activeVisit && (() => {
+          const visitDate = activeVisit.scheduled_date || activeVisit.requested_date
+          const visitStart = activeVisit.scheduled_start_time || activeVisit.requested_start_time
+          const visitEnd = activeVisit.scheduled_end_time || activeVisit.requested_end_time
+          const statusLabel = {
+            pending: 'Requested',
+            negotiating: 'Negotiating',
+            confirmed: 'Confirmed',
+            appointment_scheduled: 'Scheduled',
+            booked: 'Booked',
+          }[activeVisit.status] || activeVisit.status
+          const statusBadge = activeVisit.status === 'confirmed' || activeVisit.status === 'appointment_scheduled'
+            ? 'verified'
+            : 'pending'
+          const note = activeVisit.status === 'confirmed'
+            ? 'Your visit is confirmed. Tap Review Schedule to reschedule or cancel.'
+            : activeVisit.pending_with === 'tenant'
+              ? 'It’s your turn — tap Review Schedule to accept or counter-propose.'
+              : 'Waiting on the property team to respond. Tap Review Schedule to view.'
+          return (
+            <div className="pd__section">
+              <h2 className="section-heading">Visit Request</h2>
+              <GlassCard className="pd__visit-card">
+                <div className="pd__visit-header">
+                  <StatusBadge status={statusBadge}>{statusLabel}</StatusBadge>
+                  {visitDate && (
+                    <span className="pd__visit-time">
+                      {formatDate(visitDate)}
+                      {visitStart && visitEnd && (
+                        <> · {formatTime(visitStart)} — {formatTime(visitEnd)}</>
+                      )}
+                    </span>
+                  )}
+                </div>
+                <p className="pd__visit-note">{note}</p>
+              </GlassCard>
+            </div>
+          )
+        })()}
 
         {workflow && <OnboardingProgress workflow={workflow} navigate={navigate} />}
 

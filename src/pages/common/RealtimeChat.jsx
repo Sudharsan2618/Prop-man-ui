@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageShell } from '../../components'
+import { useGoBack } from '../../hooks/useGoBack'
 import './RealtimeChat.css'
 
 const MOCK_MESSAGES = [
@@ -15,6 +16,7 @@ const MOCK_MESSAGES = [
 export default function RealtimeChat() {
   const { chatId } = useParams()
   const navigate = useNavigate()
+  const goBack = useGoBack('/messaging')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState(MOCK_MESSAGES)
 
@@ -34,7 +36,7 @@ export default function RealtimeChat() {
     <PageShell
       header={
         <div className="chat__header">
-          <button className="chat__back-btn" onClick={() => navigate(-1)}>
+          <button className="chat__back-btn" onClick={goBack}>
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
           <div style={{ flex: 1 }}>

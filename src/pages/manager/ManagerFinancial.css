@@ -1,0 +1,106 @@
+/* AdminFinancial — NRIHomeHub style */
+
+.af { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* ── Overview Cards ── */
+.af__overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+}
+.af__ov-card {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+}
+.af__ov-icon-wrap {
+  width: 44px; height: 44px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.af__ov-label {
+  font-size: 11px; color: var(--text-tertiary); text-transform: uppercase;
+  font-weight: var(--fw-semibold); letter-spacing: 0.05em;
+}
+.af__ov-value {
+  font-size: var(--fs-h3); font-weight: var(--fw-bold); color: var(--text-primary);
+  margin: 2px 0;
+}
+.af__ov-trend {
+  font-size: 11px; font-weight: var(--fw-semibold);
+}
+.af__ov-trend--up { color: var(--status-success); }
+.af__ov-trend--warn { color: var(--status-warning); }
+
+/* ── Rent Splits ── */
+.af__split-list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.af__split-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-2);
+}
+.af__split-name { font-weight: var(--fw-semibold); color: var(--text-primary); }
+
+.af__split-details { display: flex; flex-direction: column; }
+.af__split-row {
+  display: flex; justify-content: space-between; padding: var(--space-1) 0;
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+.af__split-amount { font-weight: var(--fw-semibold); color: var(--text-primary); }
+.af__split-row--total {
+  border-top: 1px dashed var(--glass-border);
+  padding-top: var(--space-2); margin-top: var(--space-1);
+}
+.af__split-total {
+  font-weight: var(--fw-bold); color: var(--accent);
+}
+.af__split-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 10px; margin-top: var(--space-3);
+  border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+  background: var(--primary); color: #FFFFFF;
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  cursor: pointer; transition: background 0.2s;
+}
+.af__split-btn:hover { background: #152240; }
+
+/* ── Badges ── */
+.af__new-badge {
+  padding: 2px 8px; border-radius: var(--radius-full);
+  font-size: 10px; font-weight: var(--fw-bold);
+  background: rgba(239,68,68,0.1); color: var(--status-danger);
+}
+
+/* ── Invoices ── */
+.af__invoice-list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.af__inv-top {
+  display: flex; gap: var(--space-3); margin-bottom: var(--space-3);
+}
+.af__inv-icon {
+  width: 42px; height: 42px; border-radius: var(--radius-lg);
+  background: var(--bg-dark); display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.af__inv-info { flex: 1; }
+.af__inv-name { font-weight: var(--fw-semibold); color: var(--text-primary); }
+.af__inv-desc { font-size: var(--fs-caption); color: var(--text-secondary); }
+.af__inv-amount {
+  font-weight: var(--fw-bold); color: var(--accent);
+  white-space: nowrap;
+}
+
+.af__inv-actions {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2);
+}
+.af__inv-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px; border-radius: var(--radius-lg);
+  font-size: var(--fs-caption); font-weight: var(--fw-semibold);
+  cursor: pointer; transition: background 0.2s;
+}
+.af__inv-btn--reject {
+  background: #FFFFFF; color: var(--status-danger);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+.af__inv-btn--reject:hover { background: rgba(239,68,68,0.05); }
+.af__inv-btn--approve {
+  background: var(--primary); color: #FFFFFF;
+  border: 1px solid var(--primary);
+}
+.af__inv-btn--approve:hover { background: #152240; }

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   PageShell, GlassCard, PrimaryButton, Dropdown, ProgressBar,
 } from '../../components'
+import { useGoBack } from '../../hooks/useGoBack'
 import './InspectionChecklist.css'
 
 const ROOMS = [
@@ -45,6 +46,7 @@ const CONDITION_COLORS = { good: 'var(--status-success)', fair: 'var(--status-wa
 export default function InspectionChecklist() {
   const { inspId } = useParams()
   const navigate = useNavigate()
+  const goBack = useGoBack('/inspection-hub')
   const [activeRoom, setActiveRoom] = useState('living')
   const [items, setItems] = useState(CHECKLIST)
 
@@ -76,7 +78,7 @@ export default function InspectionChecklist() {
     <PageShell
       header={
         <div className="ic__header">
-          <button className="ic__close-btn" onClick={() => navigate(-1)}>
+          <button className="ic__close-btn" onClick={goBack}>
             <span className="material-symbols-outlined">close</span>
           </button>
           <span className="ic__header-title">Property Inspection</span>

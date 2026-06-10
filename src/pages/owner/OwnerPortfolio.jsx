@@ -25,8 +25,6 @@ export default function OwnerPortfolio() {
   const [workflows, setWorkflows] = useState([])
   const [loading, setLoading] = useState(true)
 
-  if (!user) return null
-
   useEffect(() => {
     if (!user) return
     fetchOwnerDashboard().then((payload) => {
@@ -75,13 +73,17 @@ export default function OwnerPortfolio() {
     })
   }, [user?.id])
 
+  if (!user) return null
+
   const onTabChange = (tab) => {
     setActiveTab(tab)
     handleTabChange(tab)
   }
 
+  // V2 workflow timestamp columns (08_database_schema.md §5.4).
   const workflowSteps = [
-    'visit_booked_at',
+    'visit_requested_at',
+    'visit_scheduled_at',
     'visit_approved_at',
     'agreement_generated_at',
     'tenant_signed_at',
@@ -104,7 +106,7 @@ export default function OwnerPortfolio() {
       header={
         <AppHeader
           title="LuxeLife"
-          subtitle={`Hello, ${user?.name?.split(' ')[0] || ''}`}
+          subtitle="Dashboard"
           avatarText={user?.initials || ''}
           hasNotification={true}
           onNotificationClick={() => navigate('/notifications')}

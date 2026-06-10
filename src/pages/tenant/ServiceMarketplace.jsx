@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useRole } from '../../context/RoleContext'
 import { useNavigation } from '../../hooks/useNavigation'
 import {
   PageShell, AppHeader, BottomNav, GlassCard, StatusBadge,
@@ -11,6 +12,7 @@ import './ServiceMarketplace.css'
 
 export default function ServiceMarketplace() {
   const navigate = useNavigate()
+  const { user } = useRole()
   const { handleTabChange: _navTabChange } = useNavigation()
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
@@ -32,14 +34,13 @@ export default function ServiceMarketplace() {
     <PageShell
       header={
         <AppHeader
-          title="Service Marketplace"
+          title="LuxeLife"
+          subtitle="Services"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
           onNotificationClick={() => navigate('/notifications')}
           onAvatarClick={() => navigate('/profile')}
-        >
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <span className="material-symbols-outlined" style={{ color: 'var(--text-secondary)', fontSize: '24px' }}>search</span>
-          </button>
-        </AppHeader>
+        />
       }
       bottomNav={
         <BottomNav role="tenant" activeTab={activeTab} onTabChange={handleTabChange} />

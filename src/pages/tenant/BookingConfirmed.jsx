@@ -3,10 +3,10 @@ import { PageShell, SubPageHeader, GlassCard, PrimaryButton } from '../../compon
 import './BookingConfirmed.css'
 
 const NEXT_STEPS = [
-  { icon: 'check_circle', label: 'Booking Confirmed', done: true },
-  { icon: 'access_time', label: 'Inspection Scheduled', done: false },
-  { icon: 'key', label: 'Key Handover', done: false },
-  { icon: 'home', label: 'Move-in Day', done: false },
+  { icon: 'check_circle', label: 'Service Booked', done: true },
+  { icon: 'person_pin', label: 'Provider Assigned', done: false },
+  { icon: 'build', label: 'Service Completed', done: false },
+  { icon: 'verified', label: 'Payment Verified', done: false },
 ]
 
 function formatDate(dateStr) {
@@ -39,7 +39,7 @@ export default function BookingConfirmed() {
           </div>
           <h1 className="booking-confirm__title">Booking Confirmed!</h1>
           <p className="booking-confirm__subtitle">
-            Congratulations! Your property booking has been confirmed. You're one step closer to your new home.
+            Your service request has been confirmed. A provider will be assigned and you'll be notified with the schedule.
           </p>
         </div>
 

@@ -1,0 +1,204 @@
+/* ============================================
+   LuxeLife — Component-Based Utility Classes
+   
+   Replaces common inline styles with reusable
+   classes for consistent design system usage.
+   ============================================ */
+
+/* ── Typography ── */
+.text-display    { font-size: var(--fs-display); font-weight: var(--fw-bold); }
+.text-h1         { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+.text-h2         { font-size: var(--fs-h2); font-weight: var(--fw-bold); }
+.text-h3         { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
+.text-body       { font-size: var(--fs-body); }
+.text-caption    { font-size: var(--fs-caption); }
+.text-overline   { font-size: var(--fs-overline); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.fw-regular      { font-weight: var(--fw-regular); }
+.fw-medium       { font-weight: var(--fw-medium); }
+.fw-semibold     { font-weight: var(--fw-semibold); }
+.fw-bold         { font-weight: var(--fw-bold); }
+
+.text-center     { text-align: center; }
+.text-right      { text-align: right; }
+.text-mono       { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; }
+
+/* ── Colors (extending globals.css) ── */
+.color-primary      { color: var(--primary); }
+.color-secondary    { color: var(--text-secondary); }
+.color-tertiary     { color: var(--text-tertiary); }
+.color-accent       { color: var(--accent); }
+.color-success      { color: var(--status-success); }
+.color-warning      { color: var(--status-warning); }
+.color-danger       { color: var(--status-danger); }
+.color-info         { color: var(--status-info); }
+.color-white        { color: #FFFFFF; }
+
+/* ── Flexbox Layout ── */
+.flex              { display: flex; }
+.flex-col          { display: flex; flex-direction: column; }
+.flex-row          { display: flex; flex-direction: row; }
+.flex-center       { display: flex; align-items: center; justify-content: center; }
+.flex-between      { display: flex; align-items: center; justify-content: space-between; }
+.flex-start        { display: flex; align-items: center; justify-content: flex-start; }
+.items-center      { align-items: center; }
+.items-start       { align-items: flex-start; }
+.items-end         { align-items: flex-end; }
+.justify-center    { justify-content: center; }
+.justify-between   { justify-content: space-between; }
+.flex-1            { flex: 1; }
+.flex-shrink-0     { flex-shrink: 0; }
+.flex-wrap         { flex-wrap: wrap; }
+
+/* ── Grid Layout ── */
+.grid              { display: grid; }
+.grid-2            { display: grid; grid-template-columns: 1fr 1fr; }
+.grid-3            { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+
+/* ── Gap ── */
+.gap-1             { gap: var(--space-1); }
+.gap-2             { gap: var(--space-2); }
+.gap-3             { gap: var(--space-3); }
+.gap-4             { gap: var(--space-4); }
+.gap-5             { gap: var(--space-5); }
+.gap-6             { gap: var(--space-6); }
+
+/* ── Spacing — Margin ── */
+.mt-1  { margin-top: var(--space-1); }
+.mt-2  { margin-top: var(--space-2); }
+.mt-3  { margin-top: var(--space-3); }
+.mt-4  { margin-top: var(--space-4); }
+.mt-6  { margin-top: var(--space-6); }
+.mt-8  { margin-top: var(--space-8); }
+.mb-1  { margin-bottom: var(--space-1); }
+.mb-2  { margin-bottom: var(--space-2); }
+.mb-3  { margin-bottom: var(--space-3); }
+.mb-4  { margin-bottom: var(--space-4); }
+
+/* ── Spacing — Padding ── */
+.p-2   { padding: var(--space-2); }
+.p-3   { padding: var(--space-3); }
+.p-4   { padding: var(--space-4); }
+.p-6   { padding: var(--space-6); }
+.p-8   { padding: var(--space-8); }
+.px-4  { padding-left: var(--space-4); padding-right: var(--space-4); }
+.py-3  { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+.py-4  { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+
+/* ── Sizing ── */
+.w-full            { width: 100%; }
+.h-full            { height: 100%; }
+.min-h-screen      { min-height: 100vh; min-height: 100dvh; }
+
+/* ── Icon Wrappers ── */
+.icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.icon-wrap--sm  { width: 32px; height: 32px; }
+.icon-wrap--md  { width: 40px; height: 40px; }
+.icon-wrap--lg  { width: 48px; height: 48px; }
+
+.icon-wrap--primary  { background: var(--primary-subtle); }
+.icon-wrap--accent   { background: var(--accent-subtle); }
+.icon-wrap--success  { background: rgba(22, 163, 74, 0.1); }
+.icon-wrap--warning  { background: rgba(217, 119, 6, 0.1); }
+.icon-wrap--danger   { background: rgba(220, 38, 38, 0.1); }
+.icon-wrap--info     { background: rgba(37, 99, 235, 0.1); }
+
+/* ── Icon Sizes ── */
+.icon-sm   { font-size: var(--icon-sm) !important; }
+.icon-md   { font-size: var(--icon-md) !important; }
+.icon-lg   { font-size: var(--icon-lg) !important; }
+.icon-xl   { font-size: var(--icon-xl) !important; }
+.icon-14   { font-size: 14px !important; }
+.icon-16   { font-size: 16px !important; }
+.icon-18   { font-size: 18px !important; }
+.icon-20   { font-size: 20px !important; }
+.icon-22   { font-size: 22px !important; }
+.icon-24   { font-size: 24px !important; }
+.icon-28   { font-size: 28px !important; }
+.icon-36   { font-size: 36px !important; }
+.icon-48   { font-size: 48px !important; }
+.icon-64   { font-size: 64px !important; }
+
+/* ── Border Radius ── */
+.rounded-sm   { border-radius: var(--radius-sm); }
+.rounded-md   { border-radius: var(--radius-md); }
+.rounded-lg   { border-radius: var(--radius-lg); }
+.rounded-xl   { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* ── Shadows ── */
+.shadow-0  { box-shadow: var(--shadow-0); }
+.shadow-1  { box-shadow: var(--shadow-1); }
+.shadow-2  { box-shadow: var(--shadow-2); }
+.shadow-3  { box-shadow: var(--shadow-3); }
+
+/* ── Background ── */
+.bg-surface    { background: var(--surface-dark); }
+.bg-dark       { background: var(--bg-dark); }
+.bg-glass      { background: var(--glass-bg); }
+.bg-primary-subtle { background: var(--primary-subtle); }
+.bg-accent-subtle  { background: var(--accent-subtle); }
+.bg-transparent    { background: transparent; }
+
+/* ── Borders ── */
+.border-glass  { border: 1px solid var(--glass-border); }
+.border-none   { border: none; }
+
+/* ── Common Layout Patterns ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8);
+  gap: var(--space-2);
+}
+
+.content-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+/* ── Interaction ── */
+.cursor-pointer  { cursor: pointer; }
+.pointer-none    { pointer-events: none; }
+.no-select       { user-select: none; }
+.tap-transparent { -webkit-tap-highlight-color: transparent; }
+
+/* ── Visibility ── */
+.hidden    { display: none; }
+.invisible { visibility: hidden; }
+.opacity-0 { opacity: 0; }
+.opacity-50 { opacity: 0.5; }
+
+/* ── Overflow ── */
+.overflow-hidden  { overflow: hidden; }
+.overflow-auto    { overflow: auto; }
+.overflow-x-auto  { overflow-x: auto; }
+
+/* ── Position ── */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.sticky   { position: sticky; }
+
+/* ── Transition ── */
+.transition-fast { transition: all 0.15s ease; }
+.transition-base { transition: all 0.2s ease; }
+.transition-slow { transition: all 0.3s ease; }

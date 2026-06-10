@@ -1,0 +1,52 @@
+/* KycReview */
+.kr { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* Document Preview */
+.kr__doc-preview { overflow: hidden; }
+.kr__doc-image {
+  width: 100%; aspect-ratio: 16/10; background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-md); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--space-2);
+  transition: transform 0.3s ease; transform-origin: center;
+}
+.kr__doc-controls {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-3);
+  margin-top: var(--space-3); padding-top: var(--space-2);
+  border-top: 1px solid rgba(27, 42, 74, 0.04);
+}
+.kr__ctrl-btn {
+  width: 32px; height: 32px; border-radius: 50%; background: rgba(27, 42, 74, 0.04);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); transition: background 0.2s;
+}
+.kr__ctrl-btn:hover { background: rgba(27, 42, 74, 0.08); }
+
+/* OCR Table */
+.kr__ocr-table { display: flex; flex-direction: column; }
+.kr__ocr-row {
+  display: flex; justify-content: space-between; padding: var(--space-2) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04); font-size: var(--fs-caption);
+}
+.kr__ocr-row:last-child { border-bottom: none; }
+.kr__ocr-label { color: var(--text-tertiary); font-weight: var(--fw-semibold); }
+.kr__ocr-value { color: var(--text-primary); font-weight: var(--fw-medium); }
+
+/* Checklist */
+.kr__checklist { display: flex; flex-direction: column; gap: var(--space-3); }
+.kr__check-item {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--fs-body); color: var(--text-secondary); cursor: pointer;
+}
+.kr__check-input { width: 18px; height: 18px; accent-color: var(--primary); flex-shrink: 0; }
+
+/* Notes */
+.kr__notes {
+  width: 100%; padding: var(--space-3); border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(27, 42, 74, 0.06);
+  color: var(--text-primary); font-size: var(--fs-caption); outline: none;
+  resize: vertical; font-family: inherit; line-height: 1.5;
+}
+.kr__notes::placeholder { color: var(--text-tertiary); }
+
+/* Actions */
+.kr__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }

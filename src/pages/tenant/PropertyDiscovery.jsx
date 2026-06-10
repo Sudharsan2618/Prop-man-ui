@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRole } from '../../context/RoleContext'
 import { useNavigation } from '../../hooks/useNavigation'
 import {
-  PageShell, SubPageHeader, BottomNav, SearchBar, FilterChips, PropertyCard, PrimaryButton,
+  PageShell, AppHeader, BottomNav, SearchBar, FilterChips, PropertyCard, PrimaryButton,
   Skeleton,
 } from '../../components'
 import { fetchProperties, formatRent } from '../../services/api'
@@ -11,10 +11,11 @@ import './PropertyDiscovery.css'
 
 export default function PropertyDiscovery() {
   const navigate = useNavigate()
-  const { role } = useRole()
+  const { role, user } = useRole()
   const { handleTabChange: _navTabChange } = useNavigation()
-  const [activeTab, setActiveTab] = useState('browse')
+  const [activeTab, setActiveTab] = useState('properties')
   const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeChips, setActiveChips] = useState(['all'])
@@ -29,15 +30,23 @@ export default function PropertyDiscovery() {
   ]
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search.trim())
+    }, 400)
+
+    return () => clearTimeout(timer)
+  }, [search])
+
+  useEffect(() => {
     loadProperties()
-  }, [activeChips, search])
+  }, [activeChips, debouncedSearch])
 
   async function loadProperties() {
     setLoading(true)
     const filters = {}
-    if (search) filters.search = search
-    if (activeChips.includes('villa')) filters.type = 'Villa'
-    if (activeChips.includes('furnished')) filters.furnishing = 'Fully Furnished'
+    if (debouncedSearch.length >= 2) filters.search = debouncedSearch
+    if (activeChips.includes('villa')) filters.type = 'VILLA'
+    if (activeChips.includes('furnished')) filters.furnishing = 'FULLY_FURNISHED'
     if (activeChips.includes('premium')) {
       const data = await fetchProperties(filters)
       setProperties(data.filter((p) => p.premium))
@@ -64,14 +73,13 @@ export default function PropertyDiscovery() {
   return (
     <PageShell
       header={
-        <SubPageHeader
-          title="Property Discovery"
-          onBack={() => navigate(-1)}
-          rightAction={
-            <button style={{ background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => navigate('/notifications')}>
-              <span className="material-symbols-outlined" style={{ color: '#FFFFFF', fontSize: '22px' }}>notifications</span>
-            </button>
-          }
+        <AppHeader
+          title="LuxeLife"
+          subtitle="Properties"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
+          onNotificationClick={() => navigate('/notifications')}
+          onAvatarClick={() => navigate('/profile')}
         />
       }
       bottomNav={<BottomNav role={role} activeTab={activeTab} onTabChange={handleTabChange} />}

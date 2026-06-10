@@ -1,55 +1,94 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { queryClient } from './services/queryClient'
 import { RoleProvider, useRole } from './context/RoleContext'
+import { ErrorBoundary, ToastProvider, OfflineBanner, GlobalErrorBanner, RequirePermission } from './components'
 
-/* ── Auth Pages ── */
+/**
+ * Route components are lazy-loaded to enable per-route code-splitting.
+ * Without this, the entire 40+-screen surface ships in the initial JS chunk.
+ */
+
+/* ── Auth pages (kept eager — small + always reachable first) ── */
 import WelcomeScreen from './pages/auth/WelcomeScreen'
 import LoginScreen from './pages/auth/LoginScreen'
 import SignupScreen from './pages/auth/SignupScreen'
 import RoleSelectionHub from './pages/auth/RoleSelectionHub'
 import FirstLoginPasswordReset from './pages/auth/FirstLoginPasswordReset'
 
-/* ── App Pages ── */
-import TenantDashboard from './pages/tenant/TenantDashboard'
-import PropertyDiscovery from './pages/tenant/PropertyDiscovery'
-import PropertyDetails from './pages/tenant/PropertyDetails'
-import SecurePayment from './pages/tenant/SecurePayment'
-import DigitalAgreement from './pages/tenant/DigitalAgreement'
-import BookingConfirmed from './pages/tenant/BookingConfirmed'
-import ServiceMarketplace from './pages/tenant/ServiceMarketplace'
-import BookSlot from './pages/tenant/BookSlot'
-import TenantPayments from './pages/tenant/TenantPayments'
-import MyServiceJobs from './pages/provider/MyServiceJobs'
-import ProviderDashboard from './pages/provider/ProviderDashboard'
-import WorkCompletionReport from './pages/provider/WorkCompletionReport'
-import PayoutLedger from './pages/provider/PayoutLedger'
-import OwnerPortfolio from './pages/owner/OwnerPortfolio'
-import ListNewProperty from './pages/owner/ListNewProperty'
-import MaintenanceLog from './pages/owner/MaintenanceLog'
-import InvoiceApproval from './pages/owner/InvoiceApproval'
-import PortfolioHub from './pages/owner/PortfolioHub'
-import EarningsAnalytics from './pages/owner/EarningsAnalytics'
-import TaxTds from './pages/owner/TaxTds'
-import InspectionHub from './pages/inspection/InspectionHub'
-import InspectionChecklist from './pages/inspection/InspectionChecklist'
-import HandoverSummary from './pages/inspection/HandoverSummary'
-import UserProfile from './pages/common/UserProfile'
-import NotificationCenter from './pages/common/NotificationCenter'
-import MessagingInbox from './pages/common/MessagingInbox'
-import RealtimeChat from './pages/common/RealtimeChat'
-import KycVerification from './pages/common/KycVerification'
-import BankAccounts from './pages/common/BankAccounts'
-import DisputeResolution from './pages/common/DisputeResolution'
-import SettlementProposal from './pages/common/SettlementProposal'
-import NotificationPreferences from './pages/common/NotificationPreferences'
-import AdminFinancial from './pages/admin/AdminFinancial'
-import AdminDashboard from './pages/admin/AdminDashboard'
-import AdminProperties from './pages/admin/AdminProperties'
-import AdminUserMgmt from './pages/admin/AdminUserMgmt'
-import KycReview from './pages/admin/KycReview'
-import AdminCalendar from './pages/admin/AdminCalendar'
-import AdminPaymentReview from './pages/admin/AdminPaymentReview'
-import AdminOnboarding from './pages/admin/AdminOnboarding'
-import BookVisit from './pages/tenant/BookVisit'
+/* ── Common / always-needed (small footprint, kept eager) ── */
+import ForbiddenScreen from './pages/common/ForbiddenScreen'
+
+/* ── Tenant ── */
+const TenantDashboard = lazy(() => import('./pages/tenant/TenantDashboard'))
+const PropertyDiscovery = lazy(() => import('./pages/tenant/PropertyDiscovery'))
+const PropertyDetails = lazy(() => import('./pages/tenant/PropertyDetails'))
+const SecurePayment = lazy(() => import('./pages/tenant/SecurePayment'))
+const DigitalAgreement = lazy(() => import('./pages/tenant/DigitalAgreement'))
+const BookingConfirmed = lazy(() => import('./pages/tenant/BookingConfirmed'))
+const ServiceMarketplace = lazy(() => import('./pages/tenant/ServiceMarketplace'))
+const BookSlot = lazy(() => import('./pages/tenant/BookSlot'))
+const TenantPayments = lazy(() => import('./pages/tenant/TenantPayments'))
+const BookVisit = lazy(() => import('./pages/tenant/BookVisit'))
+
+/* ── Provider ── */
+const MyServiceJobs = lazy(() => import('./pages/provider/MyServiceJobs'))
+const ProviderDashboard = lazy(() => import('./pages/provider/ProviderDashboard'))
+const WorkCompletionReport = lazy(() => import('./pages/provider/WorkCompletionReport'))
+const PayoutLedger = lazy(() => import('./pages/provider/PayoutLedger'))
+
+/* ── Owner ── */
+const OwnerPortfolio = lazy(() => import('./pages/owner/OwnerPortfolio'))
+const ListNewProperty = lazy(() => import('./pages/owner/ListNewProperty'))
+const MaintenanceLog = lazy(() => import('./pages/owner/MaintenanceLog'))
+const InvoiceApproval = lazy(() => import('./pages/owner/InvoiceApproval'))
+const PortfolioHub = lazy(() => import('./pages/owner/PortfolioHub'))
+const EarningsAnalytics = lazy(() => import('./pages/owner/EarningsAnalytics'))
+const TaxTds = lazy(() => import('./pages/owner/TaxTds'))
+
+/* ── Inspection ── */
+const InspectionHub = lazy(() => import('./pages/inspection/InspectionHub'))
+const InspectionChecklist = lazy(() => import('./pages/inspection/InspectionChecklist'))
+const HandoverSummary = lazy(() => import('./pages/inspection/HandoverSummary'))
+
+/* ── Common ── */
+const UserProfile = lazy(() => import('./pages/common/UserProfile'))
+const NotificationCenter = lazy(() => import('./pages/common/NotificationCenter'))
+const MessagingInbox = lazy(() => import('./pages/common/MessagingInbox'))
+const RealtimeChat = lazy(() => import('./pages/common/RealtimeChat'))
+const KycVerification = lazy(() => import('./pages/common/KycVerification'))
+const BankAccounts = lazy(() => import('./pages/common/BankAccounts'))
+const DisputeResolution = lazy(() => import('./pages/common/DisputeResolution'))
+const SettlementProposal = lazy(() => import('./pages/common/SettlementProposal'))
+const NotificationPreferences = lazy(() => import('./pages/common/NotificationPreferences'))
+
+/* ── Manager (formerly admin) ── */
+const ManagerFinancial = lazy(() => import('./pages/manager/ManagerFinancial'))
+const ManagerDashboard = lazy(() => import('./pages/manager/ManagerDashboard'))
+const ManagerProperties = lazy(() => import('./pages/manager/ManagerProperties'))
+const ManagerUserMgmt = lazy(() => import('./pages/manager/ManagerUserMgmt'))
+const KycReview = lazy(() => import('./pages/manager/KycReview'))
+const ManagerCalendar = lazy(() => import('./pages/manager/ManagerCalendar'))
+const ManagerPaymentReview = lazy(() => import('./pages/manager/ManagerPaymentReview'))
+const ManagerOnboarding = lazy(() => import('./pages/manager/ManagerOnboarding'))
+const ManagerOnboardingDetail = lazy(() => import('./pages/manager/ManagerOnboardingDetail'))
+const ManagerVisits = lazy(() => import('./pages/manager/ManagerVisits'))
+
+/* ── Dev sandbox (DEV-only route) ── */
+const ComponentSandbox = lazy(() => import('./pages/dev/ComponentSandbox'))
+
+/* ── Super Admin ── */
+const SAHome = lazy(() => import('./pages/super-admin/SAHome'))
+const SAUsers = lazy(() => import('./pages/super-admin/SAUsers'))
+const SAProperties = lazy(() => import('./pages/super-admin/SAProperties'))
+const SAPermissions = lazy(() => import('./pages/super-admin/SAPermissions'))
+const SAPropertyWizard = lazy(() => import('./pages/super-admin/SAPropertyWizard'))
+const SAUserProfile = lazy(() => import('./pages/super-admin/SAUserProfile'))
+const SAOnboarding = lazy(() => import('./pages/super-admin/SAOnboarding'))
+const SAOnboardingDetail = lazy(() => import('./pages/super-admin/SAOnboardingDetail'))
+const SAVisits = lazy(() => import('./pages/super-admin/SAVisits'))
 
 /**
  * AuthGuard — redirects unauthenticated users to /welcome.
@@ -80,6 +119,24 @@ function GuestGuard() {
 }
 
 /**
+ * RouteFallback — Shown by <Suspense> while a lazy-loaded route chunk is fetching.
+ * Kept minimal to avoid layout shift; the lazy chunk's own page chrome then renders.
+ */
+function RouteFallback() {
+  return (
+    <div style={{
+      minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-tertiary)', fontSize: 'var(--fs-caption)',
+    }}>
+      <span className="material-symbols-outlined" style={{ fontSize: '20px', marginRight: 8 }}>
+        progress_activity
+      </span>
+      Loading…
+    </div>
+  )
+}
+
+/**
  * Placeholder page.
  */
 function Placeholder({ title }) {
@@ -104,16 +161,36 @@ function RoleHome() {
   switch (role) {
     case 'owner': return <OwnerPortfolio />
     case 'provider': return <ProviderDashboard />
-    case 'admin': return <AdminDashboard />
+    case 'manager': return <ManagerDashboard />
+    case 'super_admin': return <SAHome />
     default: return <TenantDashboard />
   }
 }
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <RoleProvider defaultRole="tenant">
-        <Routes>
+    <ErrorBoundary context="AppRouter">
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <RoleProvider defaultRole="tenant">
+            <ToastProvider>
+              <OfflineBanner />
+              <GlobalErrorBanner />
+              <Suspense fallback={<RouteFallback />}>
+                <AppRoutes />
+              </Suspense>
+            </ToastProvider>
+          </RoleProvider>
+        </BrowserRouter>
+        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />}
+      </QueryClientProvider>
+    </ErrorBoundary>
+  )
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
           <Route element={<GuestGuard />}>
             <Route path="/welcome" element={<WelcomeScreen />} />
             <Route path="/login" element={<LoginScreen />} />
@@ -139,34 +216,78 @@ export default function AppRouter() {
             <Route path="/properties" element={<Placeholder title="My Properties" />} />
             <Route path="/payments" element={<TenantPayments />} />
 
-            {/* Owner */}
-            <Route path="/owner-dashboard" element={<OwnerPortfolio />} />
-            <Route path="/list-property" element={<ListNewProperty />} />
-            <Route path="/maintenance-log" element={<MaintenanceLog />} />
-            <Route path="/invoice-approval/:jobId" element={<InvoiceApproval />} />
-            <Route path="/portfolio-hub" element={<PortfolioHub />} />
-            <Route path="/earnings-analytics" element={<EarningsAnalytics />} />
-            <Route path="/tax-tds" element={<TaxTds />} />
+            {/* Owner — gated on owner.read or property.read (owner sees own scope). */}
+            <Route element={<RequirePermission anyOf={['property.read', 'owner.read']} />}>
+              <Route path="/owner-dashboard" element={<OwnerPortfolio />} />
+              <Route path="/portfolio-hub" element={<PortfolioHub />} />
+              <Route path="/earnings-analytics" element={<EarningsAnalytics />} />
+              <Route path="/tax-tds" element={<TaxTds />} />
+              <Route path="/maintenance-log" element={<MaintenanceLog />} />
+            </Route>
+            <Route element={<RequirePermission code="property.create" />}>
+              <Route path="/list-property" element={<ListNewProperty />} />
+            </Route>
+            <Route element={<RequirePermission code="payment.update" />}>
+              <Route path="/invoice-approval/:jobId" element={<InvoiceApproval />} />
+            </Route>
 
-            {/* Provider */}
-            <Route path="/jobs" element={<MyServiceJobs />} />
-            <Route path="/work-report/:jobId" element={<WorkCompletionReport />} />
-            <Route path="/provider-earnings" element={<PayoutLedger />} />
+            {/* Provider — gated on job.read (assigned scope). */}
+            <Route element={<RequirePermission code="job.read" />}>
+              <Route path="/jobs" element={<MyServiceJobs />} />
+              <Route path="/work-report/:jobId" element={<WorkCompletionReport />} />
+              <Route path="/provider-earnings" element={<PayoutLedger />} />
+            </Route>
             <Route path="/messaging" element={<MessagingInbox />} />
 
-            {/* Inspection */}
-            <Route path="/inspection-hub" element={<InspectionHub />} />
-            <Route path="/inspection-checklist/:inspId" element={<InspectionChecklist />} />
-            <Route path="/handover-summary/:inspId" element={<HandoverSummary />} />
+            {/* Inspection — gated on inspection.read */}
+            <Route element={<RequirePermission code="inspection.read" />}>
+              <Route path="/inspection-hub" element={<InspectionHub />} />
+              <Route path="/inspection-checklist/:inspId" element={<InspectionChecklist />} />
+              <Route path="/handover-summary/:inspId" element={<HandoverSummary />} />
+            </Route>
 
-            {/* Admin */}
-            <Route path="/admin-finance" element={<AdminFinancial />} />
-            <Route path="/admin-users" element={<AdminUserMgmt />} />
-            <Route path="/kyc-review/:userId" element={<KycReview />} />
-            <Route path="/admin-properties" element={<AdminProperties />} />
-            <Route path="/admin-calendar" element={<AdminCalendar />} />
-            <Route path="/admin-payments" element={<AdminPaymentReview />} />
-            <Route path="/admin-onboarding" element={<AdminOnboarding />} />
+            {/* Manager (formerly 'Admin' — DB v2 calls this role MANAGER).
+                Each section is gated on the appropriate entity permission. */}
+            <Route element={<RequirePermission anyOf={['payment.read', 'payment.update']} />}>
+              <Route path="/manager-finance" element={<ManagerFinancial />} />
+              <Route path="/manager-payments" element={<ManagerPaymentReview />} />
+            </Route>
+            <Route element={<RequirePermission code="user.read" />}>
+              <Route path="/manager-users" element={<ManagerUserMgmt />} />
+            </Route>
+            <Route element={<RequirePermission code="property.read" />}>
+              <Route path="/manager-properties" element={<ManagerProperties />} />
+            </Route>
+            <Route element={<RequirePermission code="visit_request.read" />}>
+              <Route path="/manager-calendar" element={<ManagerCalendar />} />
+              <Route path="/manager-onboarding" element={<ManagerOnboarding />} />
+              <Route path="/manager-onboarding/:workflowId" element={<ManagerOnboardingDetail />} />
+              <Route path="/manager-visits" element={<ManagerVisits />} />
+            </Route>
+            <Route element={<RequirePermission code="kyc.update" />}>
+              <Route path="/kyc-review/:userId" element={<KycReview />} />
+            </Route>
+            {/* Legacy redirects — keep one release for in-flight bookmarks. */}
+            <Route path="/admin-finance" element={<Navigate to="/manager-finance" replace />} />
+            <Route path="/admin-users" element={<Navigate to="/manager-users" replace />} />
+            <Route path="/admin-properties" element={<Navigate to="/manager-properties" replace />} />
+            <Route path="/admin-calendar" element={<Navigate to="/manager-calendar" replace />} />
+            <Route path="/admin-payments" element={<Navigate to="/manager-payments" replace />} />
+            <Route path="/admin-onboarding" element={<Navigate to="/manager-onboarding" replace />} />
+
+            {/* Super Admin — gated on user.create (super-admin-only) + audit_log.read */}
+            <Route element={<RequirePermission allOf={['user.create', 'audit_log.read']} />}>
+              <Route path="/sa" element={<SAHome />} />
+              <Route path="/sa/users" element={<SAUsers />} />
+              <Route path="/sa/users/:userId" element={<SAUserProfile />} />
+              <Route path="/sa/properties" element={<SAProperties />} />
+              <Route path="/sa/properties/create" element={<SAPropertyWizard />} />
+              <Route path="/sa/properties/:propertyId/edit" element={<SAPropertyWizard />} />
+              <Route path="/sa/permissions" element={<SAPermissions />} />
+              <Route path="/sa/onboarding" element={<SAOnboarding />} />
+              <Route path="/sa/onboarding/:workflowId" element={<SAOnboardingDetail />} />
+              <Route path="/sa/visits" element={<SAVisits />} />
+            </Route>
 
             {/* Tenant Visit Booking */}
             <Route path="/book-visit/:propertyId" element={<BookVisit />} />
@@ -182,12 +303,15 @@ export default function AppRouter() {
             <Route path="/notification-settings" element={<NotificationPreferences />} />
             <Route path="/marketplace" element={<Placeholder title="Marketplace" />} />
             <Route path="/activity" element={<Placeholder title="Activity History" />} />
+            <Route path="/forbidden" element={<ForbiddenScreen />} />
+            {/* DEV-only component sandbox */}
+            {import.meta.env.DEV && (
+              <Route path="/dev/components" element={<ComponentSandbox />} />
+            )}
           </Route>
 
-          {/* ── Catch-all ── */}
-          <Route path="*" element={<Navigate to="/welcome" replace />} />
-        </Routes>
-      </RoleProvider>
-    </BrowserRouter>
+      {/* ── Catch-all ── */}
+      <Route path="*" element={<Navigate to="/welcome" replace />} />
+    </Routes>
   )
 }

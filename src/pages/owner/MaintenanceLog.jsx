@@ -5,12 +5,14 @@ import { useNavigation } from '../../hooks/useNavigation'
 import {
   PageShell, AppHeader, BottomNav, GlassCard, StatusBadge,
   PrimaryButton, SecondaryButton, TabNav, Dropdown, Avatar, Skeleton,
+  PermissionGate,
 } from '../../components'
 import { fetchJobs, fetchPropertiesByOwner } from '../../services/api'
 import './MaintenanceLog.css'
 
 export default function MaintenanceLog() {
   const navigate = useNavigate()
+  const { user } = useRole()
   const { handleTabChange: _navTabChange } = useNavigation()
   const [activeTab, setActiveTab] = useState('maintenance')
   const [statusTab, setStatusTab] = useState('pending')
@@ -44,7 +46,16 @@ export default function MaintenanceLog() {
 
   return (
     <PageShell
-      header={<AppHeader title="Maintenance Log" onNotificationClick={() => navigate('/notifications')} />}
+      header={
+        <AppHeader
+          title="LuxeLife"
+          subtitle="Maintenance"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
+          onNotificationClick={() => navigate('/notifications')}
+          onAvatarClick={() => navigate('/profile')}
+        />
+      }
       bottomNav={<BottomNav role="owner" activeTab={activeTab} onTabChange={handleTabChange} />}
     >
       <div className="mlog stagger-children">
@@ -106,10 +117,12 @@ export default function MaintenanceLog() {
                   <span>Requested: {job.createdAt}</span>
                 </div>
                 {statusTab === 'pending' && (
-                  <div className="mlog__card-actions">
-                    <SecondaryButton variant="danger" icon="close">Reject</SecondaryButton>
-                    <PrimaryButton icon="check" onClick={() => navigate(`/invoice-approval/${job.id}`)}>Approve Quote</PrimaryButton>
-                  </div>
+                  <PermissionGate code="job.update">
+                    <div className="mlog__card-actions">
+                      <SecondaryButton variant="danger" icon="close">Reject</SecondaryButton>
+                      <PrimaryButton icon="check" onClick={() => navigate(`/invoice-approval/${job.id}`)}>Approve Quote</PrimaryButton>
+                    </div>
+                  </PermissionGate>
                 )}
               </GlassCard>
             ))

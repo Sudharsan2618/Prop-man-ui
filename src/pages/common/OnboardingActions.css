@@ -1,0 +1,83 @@
+/* OnboardingActions — shared action panel for SA + manager onboarding detail */
+
+.oba {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.oba__section-title {
+  font-size: var(--fs-overline);
+  font-weight: var(--fw-bold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.oba__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-caption);
+  color: var(--status-danger);
+}
+
+.oba__closed {
+  padding: var(--space-3);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  text-align: center;
+  background: var(--surface-darker);
+  border-radius: var(--radius-md);
+}
+
+.oba__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--surface-darker);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.oba__row--danger {
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.oba__row-text { flex: 1; min-width: 200px; }
+
+.oba__row-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.oba__row-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.oba__row-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.oba__doc-link {
+  color: var(--primary);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+}

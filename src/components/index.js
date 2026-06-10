@@ -30,3 +30,17 @@ export { default as CountdownTimer } from './CountdownTimer/CountdownTimer'
 export { default as FAB } from './FAB/FAB'
 export { default as ConfirmModal } from './ConfirmModal/ConfirmModal'
 export { default as Skeleton } from './Skeleton/Skeleton'
+
+/* Error surfacing */
+export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary'
+export { ToastProvider, useToast } from './Toast/Toast'
+export { default as OfflineBanner } from './OfflineBanner/OfflineBanner'
+export { default as GlobalErrorBanner } from './GlobalErrorBanner/GlobalErrorBanner'
+
+/* RBAC gating */
+export { default as PermissionGate } from './PermissionGate/PermissionGate'
+export { default as RequirePermission } from './RequirePermission/RequirePermission'
+
+/* Overlays */
+export { default as Drawer } from './Drawer/Drawer'
+export { default as Modal } from './Modal/Modal'

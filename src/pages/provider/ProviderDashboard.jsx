@@ -45,7 +45,7 @@ export default function ProviderDashboard() {
       header={
         <AppHeader
           title="LuxeLife"
-          subtitle={`Hello, ${user?.name?.split(' ')[0] || ''}`}
+          subtitle="Home"
           avatarText={user?.initials || ''}
           hasNotification={true}
           onNotificationClick={() => navigate('/notifications')}

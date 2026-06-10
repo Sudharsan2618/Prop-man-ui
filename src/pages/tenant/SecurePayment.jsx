@@ -7,6 +7,7 @@ import {
   fetchPropertiesByTenant, uploadPaymentReceipt, fetchPayments, uploadDocument
 } from '../../services/api'
 import { useRole } from '../../context/RoleContext'
+import { reportError } from '../../utils/errors'
 import './SecurePayment.css'
 
 export default function SecurePayment() {
@@ -33,7 +34,9 @@ export default function SecurePayment() {
     if (navProperty) {
       setProperty(navProperty)
     } else {
-      fetchPropertiesByTenant().then(props => setProperty(props?.[0] || null)).catch(() => {})
+      fetchPropertiesByTenant()
+        .then(props => setProperty(props?.[0] || null))
+        .catch((err) => reportError(err, { context: 'SecurePayment.fetchPropertiesByTenant', silent: true }))
     }
 
     if (!payment) {
@@ -42,7 +45,7 @@ export default function SecurePayment() {
           p.status === 'pending' || p.status === 'overdue' || p.status === 'awaiting_verification'
         )
         if (p) setPayment(p)
-      }).catch(() => {})
+      }).catch((err) => reportError(err, { context: 'SecurePayment.fetchPayments', silent: true }))
     }
   }, [navProperty])
 

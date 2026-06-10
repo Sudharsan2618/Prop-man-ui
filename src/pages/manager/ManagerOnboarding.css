@@ -1,0 +1,217 @@
+/* AdminOnboarding */
+
+.aonb {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.aonb__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* ── Accordion Card ── */
+.aonb__wf-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Toggle button (whole header row) */
+.aonb__wf-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+/* Chevron */
+.aonb__chevron {
+  font-size: 22px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: transform 0.25s ease;
+}
+
+.aonb__chevron--open {
+  transform: rotate(90deg);
+}
+
+/* Summary block next to chevron */
+.aonb__wf-summary {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aonb__wf-summary-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.aonb__wf-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.aonb__wf-ids {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  word-break: break-all;
+  line-height: 1.35;
+}
+
+/* Progress bar */
+.aonb__progress-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--glass-border);
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.aonb__progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--status-success);
+  transition: width 0.3s ease;
+}
+
+.aonb__progress-text {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* ── Expandable Body ── */
+.aonb__body {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Timeline */
+.aonb__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 28px;
+}
+
+.aonb__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  position: relative;
+  padding-bottom: var(--space-3);
+}
+
+.aonb__step:last-child {
+  padding-bottom: 0;
+}
+
+/* Vertical connector line */
+.aonb__step::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 22px;
+  bottom: 0;
+  width: 2px;
+  background: var(--glass-border);
+}
+
+.aonb__step:last-child::before {
+  display: none;
+}
+
+/* Step icon circle */
+.aonb__step-icon {
+  position: absolute;
+  left: -28px;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.aonb__step-icon--done {
+  background: var(--status-success);
+  color: #fff;
+}
+
+.aonb__step-icon--active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(19, 200, 236, 0.2);
+}
+
+.aonb__step-icon--pending {
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  color: var(--text-tertiary);
+}
+
+.aonb__step-icon--rejected {
+  background: var(--status-danger);
+  color: #fff;
+}
+
+.aonb__step-icon .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.aonb__step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.aonb__step-label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.aonb__step-label--pending {
+  color: var(--text-tertiary);
+}
+
+.aonb__step-time {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.aonb__step-note {
+  font-size: 11px;
+  color: var(--status-danger);
+  margin-top: 2px;
+}
+
+.aonb__step-action {
+  margin-top: var(--space-2);
+}

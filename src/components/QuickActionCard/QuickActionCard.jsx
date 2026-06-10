@@ -17,8 +17,14 @@ export default function QuickActionCard({
   ...rest
 }) {
   return (
-    <button className={`quick-action-card glass-card glass-card--interactive ${className}`} onClick={onClick} {...rest}>
-      <div className="quick-action-card__icon-wrap" style={iconColor ? { background: `${iconColor}15` } : undefined}>
+    <button
+      type="button"
+      className={`quick-action-card glass-card glass-card--interactive ${className}`}
+      onClick={onClick}
+      aria-label={label}
+      {...rest}
+    >
+      <div className="quick-action-card__icon-wrap" style={iconColor ? { background: `${iconColor}15` } : undefined} aria-hidden="true">
         <span className="material-symbols-outlined" style={iconColor ? { color: iconColor } : undefined}>
           {icon}
         </span>

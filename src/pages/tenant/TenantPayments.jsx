@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRole } from '../../context/RoleContext'
 import { useNavigation } from '../../hooks/useNavigation'
 import {
-  PageShell, SubPageHeader, BottomNav, GlassCard, PrimaryButton, StatusBadge,
+  PageShell, AppHeader, BottomNav, GlassCard, PrimaryButton, StatusBadge,
   Skeleton,
 } from '../../components'
 import { fetchPayments } from '../../services/api'
@@ -30,7 +30,7 @@ const TYPE_ICON = {
 
 export default function TenantPayments() {
   const navigate = useNavigate()
-  const { role } = useRole()
+  const { role, user } = useRole()
   const { handleTabChange: _navTabChange } = useNavigation()
   const [activeTab, setActiveTab] = useState('payments')
   const [filter, setFilter] = useState('all')
@@ -65,7 +65,16 @@ export default function TenantPayments() {
 
   return (
     <PageShell
-      header={<SubPageHeader title="Payments" onBack={() => navigate(-1)} />}
+      header={
+        <AppHeader
+          title="LuxeLife"
+          subtitle="Payments"
+          avatarText={user?.initials || ''}
+          hasNotification={true}
+          onNotificationClick={() => navigate('/notifications')}
+          onAvatarClick={() => navigate('/profile')}
+        />
+      }
       bottomNav={<BottomNav role={role} activeTab={activeTab} onTabChange={handleTabChange} />}
     >
       <div className="tp animate-fade-in">

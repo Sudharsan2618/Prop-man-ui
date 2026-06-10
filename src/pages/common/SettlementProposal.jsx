@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import {
   PageShell, GlassCard, PrimaryButton,
 } from '../../components'
+import { useGoBack } from '../../hooks/useGoBack'
 import './SettlementProposal.css'
 
 export default function SettlementProposal() {
   const navigate = useNavigate()
+  const goBack = useGoBack()
   const originalAmount = 12500
   const [deduction, setDeduction] = useState(2500)
   const [note, setNote] = useState('')
@@ -17,7 +19,7 @@ export default function SettlementProposal() {
     <PageShell
       header={
         <div className="sp__header">
-          <button className="sp__close-btn" onClick={() => navigate(-1)}>
+          <button className="sp__close-btn" onClick={goBack}>
             <span className="material-symbols-outlined">close</span>
           </button>
           <span className="sp__header-title">Propose Settlement</span>
@@ -79,8 +81,8 @@ export default function SettlementProposal() {
         </div>
 
         {/* CTAs */}
-        <PrimaryButton icon="send" onClick={() => navigate(-1)}>Send Proposal ➤</PrimaryButton>
-        <button className="sp__cancel" onClick={() => navigate(-1)}>Cancel</button>
+        <PrimaryButton icon="send" onClick={goBack}>Send Proposal ➤</PrimaryButton>
+        <button className="sp__cancel" onClick={goBack}>Cancel</button>
       </div>
     </PageShell>
   )

@@ -15,7 +15,8 @@ const TYPE_ICONS = {
   maintenance: { icon: 'build', bg: 'rgba(212,168,67,0.15)', color: '#D4A843' },
   inspection: { icon: 'fact_check', bg: 'rgba(212, 168, 67, 0.12)', color: 'var(--primary)' },
   agreement_generated: { icon: 'description', bg: 'rgba(19, 200, 236, 0.12)', color: 'var(--primary)' },
-  visit_booked: { icon: 'event', bg: 'rgba(19, 200, 236, 0.12)', color: 'var(--primary)' },
+  visit_requested: { icon: 'mail', bg: 'rgba(19, 200, 236, 0.12)', color: 'var(--primary)' },
+  visit_scheduled: { icon: 'event', bg: 'rgba(19, 200, 236, 0.12)', color: 'var(--primary)' },
   visit_cancelled: { icon: 'event_busy', bg: 'rgba(239, 68, 68, 0.12)', color: 'var(--status-danger)' },
   system: { icon: 'settings', bg: 'rgba(27, 42, 74, 0.06)', color: 'var(--text-tertiary)' },
 }

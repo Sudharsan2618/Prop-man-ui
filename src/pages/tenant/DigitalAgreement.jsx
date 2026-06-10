@@ -13,6 +13,8 @@ import {
   uploadDocument,
 } from '../../services/api'
 import { useRole } from '../../context/RoleContext'
+import { reportError } from '../../utils/errors'
+import { useGoBack } from '../../hooks/useGoBack'
 import './DigitalAgreement.css'
 
 function getInitials(name) {
@@ -28,6 +30,7 @@ function formatDate(dateStr) {
 export default function DigitalAgreement() {
   const { id: agreementId } = useParams()
   const navigate = useNavigate()
+  const goBack = useGoBack('/')
   const location = useLocation()
   const { user } = useRole()
   const [signTab, setSignTab] = useState('type')
@@ -54,7 +57,7 @@ export default function DigitalAgreement() {
     if (!agreement?.property_id) return
     fetchOnboardingWorkflows({ property_id: agreement.property_id })
       .then((items) => setWorkflow(items?.[0] || null))
-      .catch(() => {})
+      .catch((err) => reportError(err, { context: 'DigitalAgreement.fetchOnboardingWorkflows', silent: true }))
   }, [agreement?.property_id])
 
   const handleChecklistSubmit = async (type) => {
@@ -96,7 +99,7 @@ export default function DigitalAgreement() {
   }
 
   if (loading) return (
-    <PageShell header={<SubPageHeader title="Rental Agreement" onBack={() => navigate(-1)} />}>
+    <PageShell header={<SubPageHeader title="Rental Agreement" onBack={goBack} />}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', padding: 'var(--space-4)' }}>
         {[1, 2, 3].map(i => <Skeleton key={i} height="120px" radius="var(--radius-xl)" />)}
       </div>
@@ -104,10 +107,10 @@ export default function DigitalAgreement() {
   )
 
   if (!agreement) return (
-    <PageShell header={<SubPageHeader title="Rental Agreement" onBack={() => navigate(-1)} />}>
+    <PageShell header={<SubPageHeader title="Rental Agreement" onBack={goBack} />}>
       <div style={{ textAlign: 'center', padding: 'var(--space-8)', color: 'var(--text-secondary)' }}>
         <p>{error || 'Agreement not found'}</p>
-        <PrimaryButton onClick={() => navigate(-1)} style={{ marginTop: 'var(--space-4)' }}>Go Back</PrimaryButton>
+        <PrimaryButton onClick={goBack} style={{ marginTop: 'var(--space-4)' }}>Go Back</PrimaryButton>
       </div>
     </PageShell>
   )
@@ -127,7 +130,7 @@ export default function DigitalAgreement() {
       header={
         <SubPageHeader
           title="Rental Agreement"
-          onBack={() => navigate(-1)}
+          onBack={goBack}
           rightAction={
             <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ color: 'var(--text-secondary)', fontSize: '24px' }}>more_vert</span>

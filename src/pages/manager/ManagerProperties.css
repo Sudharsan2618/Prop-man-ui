@@ -1,0 +1,44 @@
+/* Admin Properties */
+
+.ap { display: flex; flex-direction: column; gap: var(--space-4); }
+
+/* Stats row */
+.ap__stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+}
+.ap__stat {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; padding: var(--space-3) !important; text-align: center;
+}
+.ap__stat-value {
+  font-size: var(--fs-h2); font-weight: var(--fw-bold); color: var(--primary);
+}
+.ap__stat-label {
+  font-size: var(--fs-caption); color: var(--text-secondary);
+}
+
+/* Property cards */
+.ap__list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.ap__card-row { display: flex; gap: var(--space-3); }
+.ap__card-thumb {
+  width: 80px; height: 80px; border-radius: var(--radius-lg);
+  object-fit: cover; flex-shrink: 0;
+}
+.ap__card-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.ap__card-name-row {
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+}
+.ap__card-name { font-weight: var(--fw-semibold); color: var(--text-primary); }
+.ap__card-address { font-size: var(--fs-caption); color: var(--text-secondary); }
+.ap__card-tenant { font-size: var(--fs-caption); color: var(--text-tertiary); }
+.ap__card-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 4px;
+}
+.ap__card-rent {
+  font-size: var(--fs-body); font-weight: var(--fw-bold); color: var(--accent);
+}
+.ap__card-bhk {
+  font-size: var(--fs-caption); color: var(--text-tertiary);
+}

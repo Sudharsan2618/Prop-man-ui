@@ -90,11 +90,11 @@ export default function RoleSelectionHub() {
           ))}
         </div>
 
-        {/* Admin Link */}
+        {/* Manager / Super Admin Link */}
         <div className="rsh__admin-section animate-fade-in" style={{ animationDelay: '500ms' }}>
-          <button className="rsh__admin-link" onClick={() => handleSelectRole('admin')}>
+          <button className="rsh__admin-link" onClick={() => handleSelectRole('manager')}>
             <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>admin_panel_settings</span>
-            Admin Login →
+            Manager Login →
           </button>
         </div>
       </div>

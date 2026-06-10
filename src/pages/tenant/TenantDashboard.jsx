@@ -18,8 +18,11 @@ const SERVICES = [
   { key: 'car', icon: 'local_car_wash', label: 'Car Cleaning' },
 ]
 
+// V2 onboarding states from onboarding_workflow_state_enum (08_database_schema.md §4).
+// Each step is gated by its timestamp column on property_onboarding_workflows.
 const OB_STEPS = [
-  { key: 'visit_booked', label: 'Visit Booked', icon: 'event', ts: 'visit_booked_at' },
+  { key: 'visit_requested', label: 'Visit Requested', icon: 'mail', ts: 'visit_requested_at' },
+  { key: 'visit_scheduled', label: 'Visit Scheduled', icon: 'event', ts: 'visit_scheduled_at' },
   { key: 'visit_approved', label: 'Visit Approved', icon: 'thumb_up', ts: 'visit_approved_at' },
   { key: 'agreement_generated', label: 'Agreement Ready', icon: 'description', ts: 'agreement_generated_at' },
   { key: 'tenant_signed', label: 'Agreement Signed', icon: 'draw', ts: 'tenant_signed_at' },
@@ -32,17 +35,19 @@ const OB_STEPS = [
 
 function getNextAction(wf) {
   switch (wf.state) {
-    case 'visit_booked':
-      return { text: 'Your visit is scheduled. The admin will confirm after the meeting.', icon: 'schedule', cta: null }
+    case 'visit_requested':
+      return { text: 'Your visit request has been sent. The manager will schedule an appointment soon.', icon: 'hourglass_top', cta: null }
+    case 'visit_scheduled':
+      return { text: 'Your visit is scheduled. The manager will confirm after the meeting.', icon: 'schedule', cta: null }
     case 'visit_approved':
     case 'agreement_generated':
       return { text: 'Your agreement is ready! Please review and sign it.', icon: 'edit_document', cta: 'Sign Agreement', route: `/agreement/${wf.agreement_id}` }
     case 'visit_rejected':
       return { text: 'Your visit was not approved. You can book a new visit for another property.', icon: 'block', cta: 'Browse Properties', route: '/browse' }
     case 'tenant_signed':
-      return { text: 'Agreement signed! Please pay the advance amount offline. The admin will confirm once received.', icon: 'account_balance', cta: 'View Payments', route: '/payments' }
+      return { text: 'Agreement signed! Please pay the advance amount offline. The manager will confirm once received.', icon: 'account_balance', cta: 'View Payments', route: '/payments' }
     case 'advance_submitted':
-      return { text: 'Advance receipt submitted. Waiting for admin confirmation.', icon: 'hourglass_top', cta: null }
+      return { text: 'Advance receipt submitted. Waiting for manager confirmation.', icon: 'hourglass_top', cta: null }
     case 'advance_approved':
       return { text: 'Advance confirmed! Upload police verification and original agreement documents.', icon: 'upload_file', cta: 'Upload Documents', route: `/agreement/${wf.agreement_id}` }
     case 'police_verification_completed':
@@ -109,9 +114,6 @@ export default function TenantDashboard() {
   const { handleTabChange } = useNavigation()
   const [activeTab, setActiveTab] = useState('home')
   const [agreementOpen, setAgreementOpen] = useState(true)
-
-  if (!user) return null
-
   const [myProperty, setMyProperty] = useState(null)
   const [loading, setLoading] = useState(true)
   const [workflows, setWorkflows] = useState([])
@@ -136,6 +138,8 @@ export default function TenantDashboard() {
       .catch(() => setRentPayment(null))
   }, [user?.id])
 
+  if (!user) return null
+
   const rentDue = rentPayment?.amount || (myProperty ? myProperty.rent + (myProperty.maintenance_charges || 0) : 0)
   const rentStatus = rentPayment?.status || 'paid'
   const dueDate = rentPayment?.dueDate ? new Date(rentPayment.dueDate).toLocaleDateString('en-IN', {
@@ -154,7 +158,7 @@ export default function TenantDashboard() {
       header={
         <AppHeader
           title="LuxeLife"
-          subtitle={`Hello, ${user?.name?.split(' ')[0] || ''}`}
+          subtitle="Home"
           avatarText={user?.initials || ''}
           hasNotification={true}
           onNotificationClick={() => navigate('/notifications')}
