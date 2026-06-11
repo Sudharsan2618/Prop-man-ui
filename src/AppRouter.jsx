@@ -32,6 +32,7 @@ const ServiceMarketplace = lazy(() => import('./pages/tenant/ServiceMarketplace'
 const BookSlot = lazy(() => import('./pages/tenant/BookSlot'))
 const TenantPayments = lazy(() => import('./pages/tenant/TenantPayments'))
 const BookVisit = lazy(() => import('./pages/tenant/BookVisit'))
+const MyOnboarding = lazy(() => import('./pages/tenant/MyOnboarding'))
 
 /* ── Provider ── */
 const MyServiceJobs = lazy(() => import('./pages/provider/MyServiceJobs'))
@@ -47,6 +48,8 @@ const InvoiceApproval = lazy(() => import('./pages/owner/InvoiceApproval'))
 const PortfolioHub = lazy(() => import('./pages/owner/PortfolioHub'))
 const EarningsAnalytics = lazy(() => import('./pages/owner/EarningsAnalytics'))
 const TaxTds = lazy(() => import('./pages/owner/TaxTds'))
+const OwnerOnboarding = lazy(() => import('./pages/owner/OwnerOnboarding'))
+const OwnerOnboardingDetail = lazy(() => import('./pages/owner/OwnerOnboardingDetail'))
 
 /* ── Inspection ── */
 const InspectionHub = lazy(() => import('./pages/inspection/InspectionHub'))
@@ -215,6 +218,7 @@ function AppRoutes() {
             <Route path="/book-service/:serviceKey" element={<BookSlot />} />
             <Route path="/properties" element={<Placeholder title="My Properties" />} />
             <Route path="/payments" element={<TenantPayments />} />
+            <Route path="/my-onboarding/:workflowId" element={<MyOnboarding />} />
 
             {/* Owner — gated on owner.read or property.read (owner sees own scope). */}
             <Route element={<RequirePermission anyOf={['property.read', 'owner.read']} />}>
@@ -223,6 +227,8 @@ function AppRoutes() {
               <Route path="/earnings-analytics" element={<EarningsAnalytics />} />
               <Route path="/tax-tds" element={<TaxTds />} />
               <Route path="/maintenance-log" element={<MaintenanceLog />} />
+              <Route path="/owner-onboarding" element={<OwnerOnboarding />} />
+              <Route path="/owner-onboarding/:workflowId" element={<OwnerOnboardingDetail />} />
             </Route>
             <Route element={<RequirePermission code="property.create" />}>
               <Route path="/list-property" element={<ListNewProperty />} />

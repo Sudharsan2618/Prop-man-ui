@@ -224,6 +224,9 @@ export default function OwnerPortfolio() {
         <div>
           <div className="section-heading-row">
             <h2 className="section-heading">Tenant Onboarding Progress</h2>
+            {workflows.length > 0 && (
+              <button className="section-link" onClick={() => navigate('/owner-onboarding')}>View All →</button>
+            )}
           </div>
           <div className="op__property-list">
             {workflows.length === 0 ? (
@@ -233,11 +236,16 @@ export default function OwnerPortfolio() {
                 </p>
               </GlassCard>
             ) : workflows.slice(0, 4).map((wf) => (
-              <GlassCard key={wf.id} className="op__onb-card">
+              <GlassCard
+                key={wf.id}
+                interactive
+                className="op__onb-card"
+                onClick={() => navigate(`/owner-onboarding/${wf.id}`)}
+              >
                 <div className="op__onb-top">
                   <div>
-                    <p className="op__onb-title">{properties.find((p) => p.id === wf.property_id)?.name || 'Property Onboarding'}</p>
-                    <p className="op__onb-sub">Tenant: {properties.find((p) => p.id === wf.property_id)?.tenant_name || 'Assigned Tenant'}</p>
+                    <p className="op__onb-title">{wf.property_name || properties.find((p) => p.id === wf.property_id)?.name || 'Property Onboarding'}</p>
+                    <p className="op__onb-sub">Tenant: {wf.tenant_name || properties.find((p) => p.id === wf.property_id)?.tenant_name || 'Assigned Tenant'}</p>
                   </div>
                   <StatusBadge status={wf.state === 'tenant_activated' ? 'verified' : wf.state.includes('rejected') ? 'overdue' : 'pending'}>
                     {stateLabel(wf.state)}

@@ -324,6 +324,105 @@
 
 .sapw2__form-error .material-symbols-outlined { font-size: 18px; }
 
+/* ── Photos grid ── */
+.sapw2__img-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.sapw2__img-tile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--glass-border);
+}
+
+.sapw2__img-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sapw2__img-tile--review {
+  border-radius: var(--radius-sm);
+}
+
+.sapw2__img-tile--more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sapw2__img-cover-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 8px;
+  background: var(--primary);
+  color: var(--text-on-primary);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+}
+
+.sapw2__img-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.sapw2__img-remove:hover { background: rgba(220, 38, 38, 0.85); }
+.sapw2__img-remove .material-symbols-outlined { font-size: 16px; }
+
+.sapw2__img-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--glass-border);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: center;
+  padding: var(--space-2);
+}
+
+.sapw2__img-drop:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.sapw2__img-drop--busy {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.sapw2__img-drop .material-symbols-outlined {
+  font-size: 32px;
+}
+
 /* ── Assignment ── */
 .sapw2__assign-skip {
   display: flex;

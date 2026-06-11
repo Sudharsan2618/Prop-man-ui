@@ -100,9 +100,9 @@ export default function ManagerOnboarding() {
                       </StatusBadge>
                     </div>
                     <p className="aonb__wf-ids">
-                      Property: {wf.property_id}
+                      Property: {wf.property_name || wf.property_id}
                     </p>
-                    <p className="aonb__wf-ids">Tenant: {wf.tenant_id}</p>
+                    <p className="aonb__wf-ids">Tenant: {wf.tenant_name || wf.tenant_id}</p>
                     <div className="aonb__progress-bar">
                       <div className="aonb__progress-fill" style={{ width: `${(done / STEPS.length) * 100}%` }} />
                     </div>

@@ -11,6 +11,8 @@ import {
   rejectVisitProposal,
   rescheduleVisit,
   cancelVisit,
+  approveVisit,
+  rejectVisit,
 } from '../../services/api'
 import './SAVisits.css'
 
@@ -35,6 +37,10 @@ const STATUS_BADGE = {
 }
 
 function todayISO() { return new Date().toISOString().slice(0, 10) }
+function visitDateHasPassed(v) {
+  if (!v?.scheduled_date) return false
+  return v.scheduled_date <= todayISO()
+}
 function formatDate(d) {
   if (!d) return '—'
   return new Date(d + 'T00:00:00').toLocaleDateString('en-IN', {
@@ -117,6 +123,22 @@ export default function SAVisits() {
     if (!window.confirm('Cancel this visit?')) return
     setBusy(true); setError('')
     try { await cancelVisit(id, { reason: 'Cancelled by super-admin' }); await load() }
+    catch (e) { setError(e.message) }
+    setBusy(false); setExpandedId(null)
+  }
+  const onApproveTenant = async (id) => {
+    if (!window.confirm('Approve the tenant after this visit? This will auto-generate the rental agreement.')) return
+    const notes = window.prompt('Notes for this approval (optional):', '') ?? ''
+    setBusy(true); setError('')
+    try { await approveVisit(id, { notes: notes.trim() || null }); await load() }
+    catch (e) { setError(e.message) }
+    setBusy(false); setExpandedId(null)
+  }
+  const onRejectTenant = async (id) => {
+    const reason = window.prompt('Reason for rejecting the tenant after this visit?')
+    if (!reason || !reason.trim()) return
+    setBusy(true); setError('')
+    try { await rejectVisit(id, { rejection_reason: reason.trim() }); await load() }
     catch (e) { setError(e.message) }
     setBusy(false); setExpandedId(null)
   }
@@ -250,6 +272,15 @@ export default function SAVisits() {
                     </div>
                   )}
                   {/* Reschedule / Cancel buttons for CONFIRMED visits live inline in the row head. */}
+
+                  {/* Post-visit approval: shown on/after the scheduled day. Approve triggers
+                      auto-generation of the rental agreement (BE: /visit-requests/:id/complete). */}
+                  {(detail.status === 'confirmed' || detail.status === 'appointment_scheduled') && !counterMode && visitDateHasPassed(detail) && (
+                    <div className="savisits__actions">
+                      <PrimaryButton fullWidth={false} icon="how_to_reg" onClick={() => onApproveTenant(detail.id)} disabled={busy}>Approve Tenant</PrimaryButton>
+                      <SecondaryButton fullWidth={false} variant="danger" icon="block" onClick={() => onRejectTenant(detail.id)} disabled={busy}>Reject Tenant</SecondaryButton>
+                    </div>
+                  )}
 
                   {counterMode && (detail.status === 'negotiating' || detail.status === 'confirmed') && (
                     <div className="savisits__form">

@@ -7,6 +7,7 @@ import {
   reviewPoliceVerification,
   reviewOriginalAgreement,
   cancelOnboardingWorkflow,
+  verifyPayment,
 } from '../../services/api'
 import './OnboardingActions.css'
 
@@ -38,6 +39,8 @@ export default function OnboardingActions({ workflow, visitsPath, onChanged }) {
 
   const policeStatus = workflow.police_verification_status
   const agreementStatus = workflow.original_agreement_status
+  const advance = workflow.advance_payment || null
+  const advanceStatus = advance?.status || null
   const state = workflow.state
 
   const inVisitStage = ['visit_requested', 'visit_scheduled', 'visit_approved', 'visit_rejected'].includes(state)
@@ -63,14 +66,27 @@ export default function OnboardingActions({ workflow, visitsPath, onChanged }) {
     setBusy(false)
   }
 
+  const onApproveAdvance = async () => {
+    if (!advance?.id) return
+    setBusy(true); setError('')
+    try {
+      await verifyPayment(advance.id, { approve: true })
+      await refresh()
+    } catch (e) { setError(e.message || 'Failed to approve advance') }
+    setBusy(false)
+  }
+
   const submitReject = async () => {
     if (!rejectModal?.reason?.trim()) { setError('Please provide a reason'); return }
     setBusy(true); setError('')
     try {
+      const reason = rejectModal.reason.trim()
       if (rejectModal.kind === 'police') {
-        await reviewPoliceVerification(workflow.id, { approve: false, rejection_reason: rejectModal.reason.trim() })
-      } else {
-        await reviewOriginalAgreement(workflow.id, { approve: false, rejection_reason: rejectModal.reason.trim() })
+        await reviewPoliceVerification(workflow.id, { approve: false, rejection_reason: reason })
+      } else if (rejectModal.kind === 'agreement') {
+        await reviewOriginalAgreement(workflow.id, { approve: false, rejection_reason: reason })
+      } else if (rejectModal.kind === 'advance' && advance?.id) {
+        await verifyPayment(advance.id, { approve: false, rejection_reason: reason })
       }
       setRejectModal(null)
       await refresh()
@@ -119,6 +135,44 @@ export default function OnboardingActions({ workflow, visitsPath, onChanged }) {
                 <SecondaryButton fullWidth={false} icon="arrow_forward" onClick={() => navigate(visitsPath)}>
                   Open Inbox
                 </SecondaryButton>
+              </div>
+            )}
+
+            {/* Advance / security deposit payment */}
+            {advance && (
+              <div className="oba__row">
+                <div className="oba__row-text">
+                  <p className="oba__row-title">Advance / security deposit</p>
+                  <p className="oba__row-sub">
+                    <StatusBadge status={advanceStatus === 'paid' ? 'verified' : advanceStatus === 'rejected' ? 'overdue' : 'pending'}>
+                      {(advanceStatus || 'pending').replace(/_/g, ' ')}
+                    </StatusBadge>
+                    {' '}₹{(advance.amount || 0).toLocaleString('en-IN')}
+                    {advance.screenshot_url && (
+                      <>
+                        {' '}
+                        <a href={advance.screenshot_url} target="_blank" rel="noopener noreferrer" className="oba__doc-link">
+                          view receipt
+                        </a>
+                      </>
+                    )}
+                  </p>
+                  {advance.rejection_reason && advanceStatus === 'rejected' && (
+                    <p className="oba__row-sub" style={{ color: 'var(--status-danger)' }}>
+                      Rejected: {advance.rejection_reason}
+                    </p>
+                  )}
+                </div>
+                {advanceStatus === 'awaiting_verification' && (
+                  <div className="oba__row-actions">
+                    <SecondaryButton fullWidth={false} variant="danger" icon="close" disabled={busy} onClick={() => setRejectModal({ kind: 'advance', reason: '' })}>
+                      Reject
+                    </SecondaryButton>
+                    <PrimaryButton fullWidth={false} icon="check" loading={busy} disabled={busy} onClick={onApproveAdvance}>
+                      Approve
+                    </PrimaryButton>
+                  </div>
+                )}
               </div>
             )}
 
@@ -200,7 +254,11 @@ export default function OnboardingActions({ workflow, visitsPath, onChanged }) {
       <Modal
         open={!!rejectModal}
         onClose={() => { if (!busy) { setRejectModal(null); setError('') } }}
-        title={rejectModal?.kind === 'police' ? 'Reject police verification' : 'Reject original agreement'}
+        title={
+          rejectModal?.kind === 'police' ? 'Reject police verification'
+            : rejectModal?.kind === 'advance' ? 'Reject advance payment'
+              : 'Reject original agreement'
+        }
         size="sm"
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>

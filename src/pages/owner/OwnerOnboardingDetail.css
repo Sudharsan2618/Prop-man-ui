@@ -1,0 +1,127 @@
+/* OwnerOnboardingDetail — read-only single workflow view for owners */
+
+.oobd {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.oobd__back { align-self: flex-start; }
+
+.oobd__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.oobd__summary-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.oobd__head-text { min-width: 0; flex: 1; }
+
+.oobd__title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.oobd__sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.oobd__sub strong { color: var(--text-primary); font-weight: var(--fw-semibold); }
+.oobd__sep { color: var(--text-tertiary); }
+
+.oobd__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.oobd__progress-pct {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.oobd__note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+
+.oobd__timeline { padding: var(--space-4); }
+
+.oobd__section-title {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.oobd__steps {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.oobd__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.oobd__step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-tertiary);
+}
+
+.oobd__step--done .oobd__step-dot {
+  background: var(--status-success);
+  color: white;
+}
+
+.oobd__step--current .oobd__step-dot {
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+
+.oobd__step-body { display: flex; flex-direction: column; gap: 2px; }
+
+.oobd__step-label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.oobd__step--pending .oobd__step-label { color: var(--text-tertiary); }
+
+.oobd__step-meta {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}

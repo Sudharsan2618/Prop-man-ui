@@ -103,6 +103,14 @@ function OnboardingCard({ wf, navigate }) {
             {action.cta}
           </PrimaryButton>
         )}
+        <button
+          type="button"
+          className="td__ob-progress-link"
+          onClick={() => navigate(`/my-onboarding/${wf.id}`)}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>open_in_new</span>
+          View full progress
+        </button>
       </div>
     </GlassCard>
   )

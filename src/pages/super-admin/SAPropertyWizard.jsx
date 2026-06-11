@@ -5,6 +5,7 @@ import {
   updateProperty,
   fetchPropertyDetails,
   fetchUsersByRole,
+  uploadImage,
 } from '../../services/api'
 import { reportError } from '../../utils/errors'
 import './SAPropertyWizard.css'
@@ -13,9 +14,24 @@ const STEPS = [
   { key: 'basic', label: 'Basic Info', icon: 'apartment', desc: 'Name, unit & location' },
   { key: 'details', label: 'Details', icon: 'straighten', desc: 'Type, size & furnishing' },
   { key: 'pricing', label: 'Pricing', icon: 'payments', desc: 'Rent, deposit & charges' },
+  { key: 'photos', label: 'Photos', icon: 'photo_library', desc: 'Upload property images' },
   { key: 'owner', label: 'Owner', icon: 'real_estate_agent', desc: 'Assign NRI owner' },
   { key: 'managers', label: 'Managers', icon: 'manage_accounts', desc: 'Assign managers' },
   { key: 'review', label: 'Review', icon: 'fact_check', desc: 'Confirm & publish' },
+]
+
+const MAX_IMAGES = 10
+
+// Indian states + UTs — used to drive the state dropdown so input stays
+// consistent across listings.
+const INDIAN_STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+  'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
+  'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+  'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+  'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+  'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu',
+  'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry',
 ]
 
 const TYPE_OPTIONS = [
@@ -37,7 +53,7 @@ const EMPTY_FORM = {
   name: '', unit: '', address: '', city: '', state: '', pincode: '',
   type: 'apartment', bhk: '2 BHK', sqft: '', furnishing: 'semi_furnished',
   floor: '', total_floors: '', facing: '', rent: '', security_deposit: '',
-  maintenance_charges: '', description: '', premium: false,
+  maintenance_charges: '', description: '', premium: false, images: [],
 }
 
 function getInitials(name) {
@@ -74,6 +90,13 @@ export default function SAPropertyWizard() {
   const [selectedManagers, setSelectedManagers] = useState([])
   const [skipManagers, setSkipManagers] = useState(false)
 
+  // Photo uploads
+  const [uploadingImages, setUploadingImages] = useState(false)
+  const [imageError, setImageError] = useState('')
+
+  // Pincode lookup
+  const [pincodeLookup, setPincodeLookup] = useState({ loading: false, hit: false })
+
   const setField = (key, value) => setForm(prev => ({ ...prev, [key]: value }))
 
   // ── Load existing property in edit mode ──
@@ -103,6 +126,7 @@ export default function SAPropertyWizard() {
           maintenance_charges: toFormString(p.maintenance_charges),
           description: toFormString(p.description),
           premium: Boolean(p.premium),
+          images: Array.isArray(p.images) ? p.images : [],
         })
         setStatus(p.status || 'draft')
         if (p.owner) { setSelectedOwner(p.owner); setSkipOwner(false) } else { setSkipOwner(true) }
@@ -119,13 +143,13 @@ export default function SAPropertyWizard() {
 
   // Load owners / managers when those steps open
   useEffect(() => {
-    if (step === 3 && !skipOwner) {
+    if (step === 4 && !skipOwner) {
       fetchUsersByRole('owner', ownerSearch).then(setOwners).catch(() => setOwners([]))
     }
   }, [step, ownerSearch, skipOwner])
 
   useEffect(() => {
-    if (step === 4 && !skipManagers) {
+    if (step === 5 && !skipManagers) {
       fetchUsersByRole('manager', managerSearch).then(setManagers).catch(() => setManagers([]))
     }
   }, [step, managerSearch, skipManagers])
@@ -151,10 +175,10 @@ export default function SAPropertyWizard() {
   const validateStep = useCallback((s) => {
     switch (s) {
       case 0: return validateBasic()
-      case 3:
+      case 4:
         if (!skipOwner && !selectedOwner) return 'Select an owner — or check "Skip" to assign later.'
         return null
-      case 4:
+      case 5:
         if (!skipManagers && selectedManagers.length === 0) return 'Select at least one manager — or check "Skip" to assign later.'
         return null
       default: return null
@@ -201,7 +225,7 @@ export default function SAPropertyWizard() {
       premium: form.premium,
       status: nextStatus,
       amenities: [],
-      images: [],
+      images: form.images || [],
     }
     payload.owner_id = (!skipOwner && selectedOwner) ? selectedOwner.id : null
     payload.manager_ids = (!skipManagers && selectedManagers.length > 0)
@@ -244,6 +268,71 @@ export default function SAPropertyWizard() {
   const filteredOwners = useMemo(() => owners, [owners])
   const filteredManagers = useMemo(() => managers, [managers])
 
+  // ── Image upload ──
+  const handleImageFiles = async (files) => {
+    if (!files || files.length === 0) return
+    const current = form.images || []
+    const room = MAX_IMAGES - current.length
+    if (room <= 0) {
+      setImageError(`Maximum ${MAX_IMAGES} images. Remove one to add another.`)
+      return
+    }
+    const toUpload = Array.from(files).slice(0, room)
+    setImageError('')
+    setUploadingImages(true)
+    try {
+      const uploaded = []
+      for (const file of toUpload) {
+        const url = await uploadImage(file, `properties/${propertyId || 'new'}`)
+        if (url) uploaded.push(url)
+      }
+      if (uploaded.length) {
+        setForm((prev) => ({ ...prev, images: [...(prev.images || []), ...uploaded] }))
+      }
+    } catch (e) {
+      setImageError(e?.message || 'Failed to upload image(s).')
+    } finally {
+      setUploadingImages(false)
+    }
+  }
+
+  const removeImage = (url) => {
+    setForm((prev) => ({ ...prev, images: (prev.images || []).filter((u) => u !== url) }))
+  }
+
+  // ── Pincode → city/state auto-fill (api.postalpincode.in) ──
+  const lookupPincode = async (pin) => {
+    if (!/^\d{6}$/.test(pin)) return
+    setPincodeLookup({ loading: true, hit: false })
+    try {
+      const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`)
+      const data = await res.json()
+      const post = Array.isArray(data) && data[0]?.Status === 'Success'
+        ? data[0].PostOffice?.[0]
+        : null
+      if (post) {
+        setForm((prev) => ({
+          ...prev,
+          // Only overwrite if blank — don't stomp user edits.
+          city: prev.city || post.District || post.Block || '',
+          state: prev.state || post.State || '',
+        }))
+        setPincodeLookup({ loading: false, hit: true })
+      } else {
+        setPincodeLookup({ loading: false, hit: false })
+      }
+    } catch {
+      setPincodeLookup({ loading: false, hit: false })
+    }
+  }
+
+  const onPincodeChange = (v) => {
+    const digits = v.replace(/\D/g, '').slice(0, 6)
+    setField('pincode', digits)
+    if (digits.length === 6) lookupPincode(digits)
+    else if (pincodeLookup.hit) setPincodeLookup({ loading: false, hit: false })
+  }
+
   // ── Step bodies ──
   const renderBasicInfo = () => (
     <>
@@ -263,17 +352,102 @@ export default function SAPropertyWizard() {
       </div>
       <div className="sapw2__form-row sapw2__form-row--3">
         <div className="sapw2__form-group">
+          <label className="sapw2__form-label">Pincode *</label>
+          <div style={{ position: 'relative' }}>
+            <input
+              className="sapw2__form-input"
+              placeholder="400001"
+              maxLength={6}
+              value={form.pincode}
+              onChange={(e) => onPincodeChange(e.target.value)}
+            />
+            {pincodeLookup.loading && (
+              <span className="sapw2__hint" style={{ display: 'block', marginTop: 4 }}>Looking up…</span>
+            )}
+            {pincodeLookup.hit && !pincodeLookup.loading && (
+              <span className="sapw2__hint" style={{ display: 'block', marginTop: 4, color: 'var(--status-success)' }}>
+                City & state pre-filled — edit if needed.
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="sapw2__form-group">
           <label className="sapw2__form-label">City *</label>
           <input className="sapw2__form-input" placeholder="Mumbai" value={form.city} onChange={e => setField('city', e.target.value)} />
         </div>
         <div className="sapw2__form-group">
           <label className="sapw2__form-label">State *</label>
-          <input className="sapw2__form-input" placeholder="Maharashtra" value={form.state} onChange={e => setField('state', e.target.value)} />
+          <select
+            className="sapw2__form-select"
+            value={form.state}
+            onChange={(e) => setField('state', e.target.value)}
+          >
+            <option value="">Select state…</option>
+            {INDIAN_STATES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
         </div>
-        <div className="sapw2__form-group">
-          <label className="sapw2__form-label">Pincode *</label>
-          <input className="sapw2__form-input" placeholder="400001" maxLength={6} value={form.pincode} onChange={e => setField('pincode', e.target.value.replace(/\D/g, ''))} />
+      </div>
+    </>
+  )
+
+  const renderPhotos = () => (
+    <>
+      <p className="sapw2__hint" style={{ marginBottom: 'var(--space-3)' }}>
+        Upload up to {MAX_IMAGES} images (JPG, PNG, or WebP — max 5 MB each).
+        The first image is used as the cover on listings.
+      </p>
+
+      {imageError && (
+        <div className="sapw2__form-error">
+          <span className="material-symbols-outlined">error</span>
+          <span>{imageError}</span>
         </div>
+      )}
+
+      <div className="sapw2__img-grid">
+        {(form.images || []).map((url, idx) => (
+          <div key={url} className="sapw2__img-tile">
+            <img src={url} alt={`Property ${idx + 1}`} />
+            {idx === 0 && <span className="sapw2__img-cover-badge">Cover</span>}
+            <button
+              type="button"
+              className="sapw2__img-remove"
+              onClick={() => removeImage(url)}
+              aria-label="Remove image"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        ))}
+
+        {(form.images || []).length < MAX_IMAGES && (
+          <label className={`sapw2__img-drop ${uploadingImages ? 'sapw2__img-drop--busy' : ''}`}>
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              hidden
+              disabled={uploadingImages}
+              onChange={(e) => { handleImageFiles(e.target.files); e.target.value = '' }}
+            />
+            {uploadingImages ? (
+              <>
+                <span className="material-symbols-outlined sapw2__spin">progress_activity</span>
+                <span>Uploading…</span>
+              </>
+            ) : (
+              <>
+                <span className="material-symbols-outlined">add_photo_alternate</span>
+                <span>Add photos</span>
+                <span className="sapw2__hint">
+                  {(form.images || []).length} / {MAX_IMAGES}
+                </span>
+              </>
+            )}
+          </label>
+        )}
       </div>
     </>
   )
@@ -462,6 +636,27 @@ export default function SAPropertyWizard() {
         </div>
 
         <div className="sapw2__review-card">
+          <p className="sapw2__review-card-title">Photos</p>
+          {(form.images || []).length === 0 ? (
+            <p className="sapw2__review-value sapw2__review-value--muted">No images uploaded</p>
+          ) : (
+            <div className="sapw2__img-grid">
+              {(form.images || []).slice(0, 8).map((url, idx) => (
+                <div key={url} className="sapw2__img-tile sapw2__img-tile--review">
+                  <img src={url} alt={`Property ${idx + 1}`} />
+                  {idx === 0 && <span className="sapw2__img-cover-badge">Cover</span>}
+                </div>
+              ))}
+              {(form.images || []).length > 8 && (
+                <div className="sapw2__img-tile sapw2__img-tile--more">
+                  +{(form.images || []).length - 8}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="sapw2__review-card">
           <p className="sapw2__review-card-title">Assignments</p>
           <div className="sapw2__review-grid">
             <div className="sapw2__review-field">
@@ -487,9 +682,10 @@ export default function SAPropertyWizard() {
       case 0: return renderBasicInfo()
       case 1: return renderDetails()
       case 2: return renderPricing()
-      case 3: return renderAssign('owner')
-      case 4: return renderAssign('managers')
-      case 5: return renderReview()
+      case 3: return renderPhotos()
+      case 4: return renderAssign('owner')
+      case 5: return renderAssign('managers')
+      case 6: return renderReview()
       default: return null
     }
   }

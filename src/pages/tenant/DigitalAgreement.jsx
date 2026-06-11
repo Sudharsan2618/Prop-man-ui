@@ -293,7 +293,17 @@ export default function DigitalAgreement() {
               <p style={{ fontSize: 'var(--fs-caption)', color: 'var(--text-secondary)' }}>
                 The agreement is fully executed. You can now proceed with move-in on {formatDate(agreement.lease_start)}.
               </p>
-              <PrimaryButton icon="download" style={{ marginTop: 'var(--space-4)' }} onClick={() => window.print()}>
+              <PrimaryButton
+                icon="download"
+                style={{ marginTop: 'var(--space-4)' }}
+                onClick={() => {
+                  if (agreement.pdf_url) {
+                    window.open(agreement.pdf_url, '_blank', 'noopener,noreferrer')
+                  } else {
+                    window.print()
+                  }
+                }}
+              >
                 Download Copy
               </PrimaryButton>
             </div>
